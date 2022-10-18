@@ -5,7 +5,7 @@ about : Description d'une user story
 title : '[US] Code + name'
 ---
 
-### Name
+### Description
 
 - En tant que [acteur]
   - je peux [action à faire]
