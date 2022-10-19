@@ -37,6 +37,11 @@ public class Enfant {
 	@OneToMany(mappedBy = "enfant")
 	private List<Inscriptions> inscriptions;
 
+	public Enfant() {
+		this.nom = "";
+		this.prenom = "";
+	}
+
 	public Enfant(String nom, String prenom, Date naiss) {
 		this.nom = nom;
 		this.prenom = prenom;
