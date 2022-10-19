@@ -1,0 +1,4 @@
+2022-10-19 12:33:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "parent" non trouvée
+Table "parent" not found; SQL statement:
+SELECT * FROM "parent" [42102-214]
