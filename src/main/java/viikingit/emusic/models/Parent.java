@@ -4,48 +4,44 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Parent {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
+	@Column
 	private String nom;
 
 	private String prenom;
-	private Date dateNaiss;
+	private String password ;
+
 	private String adresse;
 	private String ville;
 	private String email;
-	private int quotienFamilial;
+	private int quotientFamilial;
 	private String tel1;
 	private String tel2;
 
 	@OneToMany(mappedBy = "parent")
 	private List<Enfant> enfants = new ArrayList<>();
-
-	public Parent(String nom, String prenom, Date naiss, String ville, String email, int qFam, String tel,
-			String telbis) {
-		this.nom = nom;
-		this.prenom = prenom;
-		this.dateNaiss = naiss;
-		this.ville = ville;
-		this.email = email;
-		this.quotienFamilial = qFam;
-		this.tel1 = tel;
-		this.tel2 = telbis;
-	}
 
 }

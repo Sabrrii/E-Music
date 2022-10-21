@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import viikingit.emusic.models.Parent;
 
-public interface IResponsableRepository extends CrudRepository<Parent, Integer> {
+public interface IParentRepository extends CrudRepository<Parent, Integer> {
 
 }
