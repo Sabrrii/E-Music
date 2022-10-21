@@ -1,11 +1,12 @@
 {{> /include/header }}
 
 <div id="app" class="ui container">
-</div>  
+</div>
+  
   <!-- Page Contents -->
   <div class="pusher">
 	    <div class="ui inverted vertical masthead center aligned segment">
-
+	  
 	      <div class="ui container">
 	        <div class="ui large secondary inverted pointing menu">
 	          <a class="toc item">
@@ -14,7 +15,7 @@
 	          <a class="active item">Accueil</a>
 	          <div class="right item">
 	            <a class="ui inverted button" href="user/login.html">Connexion</a>
-	            <a class="ui inverted button">Inscription</a>
+	            <a href= "/signup" class="ui inverted button">Inscription</a>
 	          </div>
 	        </div>
 	      </div>
@@ -33,42 +34,52 @@
         <div class="row">
           <div class="eight wide column">
             <h3 class="ui header">Ce qu'on enseigne</h3>
-            <div class="ui items">
-  <div class="item">
-    <div class="image">
-      <img src="/images/wireframe/image.png">
-    </div>
-    <div class="content">
-      <a class="header">Header</a>
-      <div class="meta">
-        <span>Description</span>
-      </div>
-      <div class="description">
-        <p></p>
-      </div>
-      <div class="extra">
-        Additional Details
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="image">
-      <img src="/images/wireframe/image.png">
-    </div>
-    <div class="content">
-      <a class="header">Header</a>
-      <div class="meta">
-        <span>Description</span>
-      </div>
-      <div class="description">
-        <p></p>
-      </div>
-      <div class="extra">
-        Additional Details
-      </div>
-    </div>
-  </div>
-</div>
+            <!-- Grille des instruments -->
+            <div class="ui massive aligned animated list">
+                <div class="item">
+                  <img class="ui avatar image" src="/img/flute-traversiere.png">
+                  <div class="content">
+                    <div class="header">Clavier</div>
+                  </div>
+                </div>
+                <div class="item">
+                  <img class="ui avatar image" src="/img/guitare-elec.png">
+                  <div class="content">
+                    <div class="header">Instruments amplifiés</div>
+                  </div>
+                </div>
+                <div class="item">
+                  <img class="ui avatar image" src="/images/avatar/small/daniel.jpg">
+                  <div class="content">
+                    <div class="header">Bois</div>
+                  </div>
+                </div>
+                <div class="item">
+                    <img class="ui avatar image" src="/images/avatar/small/daniel.jpg">
+                    <div class="content">
+                      <div class="header">Cuivres</div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <img class="ui avatar image" src="/images/avatar/small/daniel.jpg">
+                    <div class="content">
+                      <div class="header">Cordes</div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <img class="ui avatar image" src="/images/avatar/small/daniel.jpg">
+                    <div class="content">
+                      <div class="header">Percussions</div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        <div class="row">
+        <div class="ui middle aligned stackable grid container">
+          <div class="center aligned column">
+            <a class="ui huge button">Tout voir</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
