@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Parent extends Enfant {
+public class Parent {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,7 +38,9 @@ public class Parent extends Enfant {
 
 	public Parent(String nom, String prenom, Date naiss, String ville, String email, int qFam, String tel,
 			String telbis) {
-		super(nom, prenom, naiss);
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaiss = naiss;
 		this.ville = ville;
 		this.email = email;
 		this.quotienFamilial = qFam;
