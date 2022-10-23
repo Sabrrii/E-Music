@@ -43,5 +43,6 @@ public class Parent {
 
 	@OneToMany(mappedBy = "parent")
 	private List<Enfant> enfants = new ArrayList<>();
+	
 
 }
