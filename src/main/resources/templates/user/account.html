@@ -1,0 +1,87 @@
+<div id="app">
+{{ > /include/header}}
+
+{{ > /include/header_bar}}
+
+  <div class="ui secondary vertical pointing menu">
+  <a class="item active">
+    Home
+  </a>
+  <a  @click="isActive='account'":class="{active : isActive === 'account'}" class="item">
+    Mes informations
+  </a>
+  <a class="item">
+    Friends
+  </a>
+</div>
+{{#parent}}
+<div v-show="isActive === 'account'" class="ui vertical ">
+	<form class="ui large form" action="/signup" method="post">
+      <div class="ui stacked segment">
+	      <div class="ui form">
+	 		 <div class="fields">
+			    <div class="field">
+			      <input required="required" type="text" name="prenom" placeholder="prénom">
+			    </div>
+			    <div class="field">
+			      <input required="required" type="text"  name ="nom" placeholder="nom">
+			   </div>
+			 </div>
+		</div>
+		
+		<div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input  required="required" type="text" name="username" placeholder=" addresse E-mail ">
+          </div>
+        </div>
+        
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Mot de passe">
+          </div>
+        </div>
+		
+		<div class="field">
+			<div class="ui left icon input">
+				<i class="home icon"></i>
+				<input required="required" type="text"  name="adresse" placeholder="adresse de résidence">
+			</div>
+		</div>
+		
+		<div class="field">
+			<div class="ui left icon input">
+				<i class="city icon"></i>
+				<input required="required" type="text"  name="ville" placeholder="ville">
+			</div>
+		</div>
+		
+		<div class="field">
+			<div class="ui left icon input">
+				<input required="required" type="number"  name="quotientFamilial " value ="0" placeholder="quotient familliale">
+			</div>
+		</div>
+
+	     <div class="ui form">
+	 		 <div class="fields">
+			    <div class="field">
+			      <input required="required" type="text" name="tel1" placeholder="Telephone">
+			    </div>
+			    <div class="field">
+			      <input type="text"  name ="tel2" placeholder="Telephone">
+			   </div>
+			 </div>		
+
+      </div>
+		<button class="ui fluid large teal submit button" >Login</button>
+	</div>
+    </form>
+</div>
+ {{/parent}}
+
+
+{{ >/include/footer}}
+
+</div>
+{{{vue}}}

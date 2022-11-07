@@ -14,8 +14,14 @@
 	          </a>
 	          <a class="active item">Accueil</a>
 	          <div class="right item">
-	            <a  href="/login" class="ui inverted button">Connexion</a>
-	            <a href= "/signup" class="ui inverted button">Inscription</a>
+	          	     {{#userCo}}
+	         			<a  href="/logout" class="ui inverted button">Déconnexion</a>
+	        		 {{/userCo}}
+	        		 {{^userCo}}
+	        		 	 <a  href="/login" class="ui inverted button">Connexion</a>
+	        		 	 <a href= "/signup" class="ui inverted button">Inscription</a>
+	        		 {{/userCo}}
+
 	          </div>
 	        </div>
 	      </div>
@@ -25,7 +31,10 @@
 	          e-Music
 	        </h1>
 	        <h2>"Le virtuose ne sert pas la musique ; il s'en sert."</h2>
-	        <div class="ui huge primary button">Accèder à mon compte<i class="right arrow icon"></i></div>
+	        {{#userCo}}
+	        	<h1>Bienvenue sur votre espace {{Prenom}}</h1>
+	        {{/userCo}}
+	        <a href ="/account" class="ui huge primary button">Accèder à mon compte<i class="right arrow icon"></i></a>
 	      </div>
   		</div>
 

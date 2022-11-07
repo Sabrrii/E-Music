@@ -35,7 +35,14 @@ public class DbUserLoginService implements UserDetailsService, UserDetails{
     public Parent createUser(Parent parent) {
         Parent u = new Parent();
         u.setUsername(parent.getUsername());
-        u.setPassword(passwordEncoder.encode(parent.getPassword())); // (3)
+        u.setPassword(passwordEncoder.encode(parent.getPassword()));
+        u.setAdresse(parent.getAdresse());
+        u.setNom(parent.getNom());
+        u.setPrenom(parent.getPrenom());
+        u.setQuotientFamilial(parent.getQuotientFamilial());
+        u.setTel1(parent.getTel1());// (3)
+        u.setTel2(parent.getTel2());// (3)
+        u.setVille(parent.getVille());
         return parRepo.save(u);
     }
     
