@@ -1,17 +1,13 @@
 package viikingit.emusic.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
-import net.bytebuddy.asm.Advice.OffsetMapping.Sort;
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.repository.IParentRepository;
 import viikingit.emusic.service.DbUserLoginService;
@@ -21,7 +17,7 @@ public class MainController {
 
 	@Autowired
 	private IParentRepository parentRepo;
-	
+
 	@Autowired
 	private UserDetailsService uService;
 
@@ -30,7 +26,6 @@ public class MainController {
 		return "index";
 	}
 
-
 	@GetMapping("signup")
 	public String signUp() {
 		return "/user/signUp";
@@ -38,24 +33,20 @@ public class MainController {
 
 	@PostMapping("signup")
 	public RedirectView addParent(@ModelAttribute Parent parent) {
-		Parent par = ((DbUserLoginService)uService).createUser(parent);
+		Parent par = ((DbUserLoginService) uService).createUser(parent);
 		parentRepo.save(par);
 		return new RedirectView("");
 	}
-	
+
 	@GetMapping("login")
 	public String login() {
 		return "/user/login";
 	}
-	
-	/*@PostMapping("login")
-	public  log() {
-		
-	}*/
 
-	@GetMapping("cours")
-	public String AllerACours() {
-		return "cours/list_cours";
-	}
+	/*
+	 * @PostMapping("login") public log() {
+	 * 
+	 * }
+	 */
 
 }
