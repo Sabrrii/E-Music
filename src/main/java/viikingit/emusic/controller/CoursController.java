@@ -8,13 +8,11 @@ import viikingit.emusic.models.Cours;
 
 @Controller
 public class CoursController {
-	
+
 	@GetMapping("newCours")
 	public String newCours(ModelMap model) {
-		model.addAttribute("orga", new Cours());
+		model.addAttribute("cours", new Cours());
 		return "cours/formNewCours";
 	}
-	
-	
-	
+
 }

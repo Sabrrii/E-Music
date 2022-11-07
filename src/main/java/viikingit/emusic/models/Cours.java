@@ -18,6 +18,10 @@ import lombok.Setter;
 @Entity
 public class Cours {
 
+	public Cours() {
+		super();
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
