@@ -2,6 +2,7 @@ package viikingit.emusic.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -13,12 +14,16 @@ import org.springframework.web.servlet.view.RedirectView;
 import net.bytebuddy.asm.Advice.OffsetMapping.Sort;
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.repository.IParentRepository;
+import viikingit.emusic.service.DbUserLoginService;
 
 @Controller
 public class MainController {
 
 	@Autowired
 	private IParentRepository parentRepo;
+	
+	@Autowired
+	private UserDetailsService uService;
 
 	@GetMapping("")
 	public String index() {
@@ -33,7 +38,8 @@ public class MainController {
 
 	@PostMapping("signup")
 	public RedirectView addParent(@ModelAttribute Parent parent) {
-		parentRepo.save(parent);
+		Parent par = ((DbUserLoginService)uService).createUser(parent);
+		parentRepo.save(par);
 		return new RedirectView("");
 	}
 	

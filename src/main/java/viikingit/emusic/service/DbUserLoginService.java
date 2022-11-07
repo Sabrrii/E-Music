@@ -16,27 +16,29 @@ import viikingit.emusic.repository.IParentRepository;
 public class DbUserLoginService implements UserDetailsService, UserDetails{
 
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private IParentRepository parRepo;
 	
   @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       Optional<Parent> opt =  parRepo.findByEmail(username);
+       Optional<Parent> opt =  parRepo.findByUsername(username);
        if(opt.isPresent()) {
     	   return opt.get();
        }
        throw new UsernameNotFoundException(username + "n'existe pas"); 
     }
+  
+  
     
-   /* public User createUser(String email, String password) {
-        User u = new User();
-        u.setEmail(email);
-        u.setPassword(passwordEncoder.encode(password)); // (3)
-        return u;
+    public Parent createUser(Parent parent) {
+        Parent u = new Parent();
+        u.setUsername(parent.getUsername());
+        u.setPassword(passwordEncoder.encode(parent.getPassword())); // (3)
+        return parRepo.save(u);
     }
-    */
+    
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

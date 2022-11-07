@@ -39,11 +39,10 @@ public class Parent implements UserDetails {
 
 	private String adresse;
 	private String ville;
-	private String email;
+	private String username;
 	private int quotientFamilial;
 	private String tel1;
 	private String tel2;
-	private String username = email;
 
 	@OneToMany(mappedBy = "parent")
 	private List<Enfant> enfants = new ArrayList<>();
@@ -57,7 +56,7 @@ public class Parent implements UserDetails {
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return email;
+		return username;
 	}
 	
 	@Override
