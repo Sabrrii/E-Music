@@ -1,12 +1,16 @@
 package viikingit.emusic.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import net.bytebuddy.asm.Advice.OffsetMapping.Sort;
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.repository.IParentRepository;
 
@@ -32,6 +36,16 @@ public class MainController {
 		parentRepo.save(parent);
 		return new RedirectView("");
 	}
+	
+	@GetMapping("login")
+	public String login() {
+		return "/user/login";
+	}
+	
+	/*@PostMapping("login")
+	public  log() {
+		
+	}*/
 
 	@GetMapping("cours")
 	public String AllerACours() {
