@@ -17,8 +17,7 @@ import viikingit.emusic.service.DbUserLoginService;
 public class WebSecurityConfig {
 	@Bean // (2)
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/**", "/h2-console/**", "/webjars/**")
-				.permitAll() // (3)
+		http.authorizeRequests().antMatchers("/**", "/h2-console/**", "/webjars/**", "/img**").permitAll() // (3)
 				.anyRequest().authenticated() // (4)
 				.and().formLogin() // (5)
 				.loginPage("/login").defaultSuccessUrl("/")// (5)
@@ -28,15 +27,15 @@ public class WebSecurityConfig {
 		http.csrf().disable();
 		return http.build();
 	}
-	
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new DbUserLoginService(); // (2)
-    }
-    
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() { // (2)
-        return new BCryptPasswordEncoder();
-    }
-	
+
+	@Bean
+	public UserDetailsService userDetailsService() {
+		return new DbUserLoginService(); // (2)
+	}
+
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() { // (2)
+		return new BCryptPasswordEncoder();
+	}
+
 }
