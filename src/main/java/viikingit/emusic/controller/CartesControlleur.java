@@ -1,9 +1,13 @@
 package viikingit.emusic.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -24,6 +28,19 @@ public class CartesControlleur {
 	@PostMapping("formCarte")
 	public RedirectView addCarte(@ModelAttribute Cartes carte) {
 		carteRepo.save(carte);
-		return new RedirectView("");
+		return new RedirectView("/");
+	}
+
+	@GetMapping("edit/{id}")
+	public String editCarte(ModelMap model, @PathVariable int id) {
+		Optional<Cartes> carte = carteRepo.findById(id);
+		model.put("carte", carte.get());
+		return "/user/editCarte";
+	}
+
+	@PostMapping("editCarte")
+	public RedirectView updateCard(@PathVariable int id, @ModelAttribute Cartes carte) {
+		carteRepo.save(carte);
+		return new RedirectView("/");
 	}
 }
