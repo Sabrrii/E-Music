@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -35,7 +35,7 @@ public class Parent implements UserDetails {
 	private String nom;
 
 	private String prenom;
-	private String password ;
+	private String password;
 
 	private String adresse;
 	private String ville;
@@ -46,32 +46,32 @@ public class Parent implements UserDetails {
 
 	@OneToMany(mappedBy = "parent")
 	private List<Enfant> enfants = new ArrayList<>();
-	
+
+	@OneToOne(mappedBy = "user")
+	private Cartes carte;
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
 		return username;
 	}
-	
+
 	@Override
 	public String getPassword() {
 		return password;
 	}
-	
-	
-	
+
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
 
 	@Override
 	public boolean isAccountNonLocked() {
@@ -79,20 +79,16 @@ public class Parent implements UserDetails {
 		return true;
 	}
 
-
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
-
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
-
 
 }
