@@ -37,12 +37,19 @@ public class CoursController {
 	@PostMapping("newCours")
 	public RedirectView newSubmitCours(@ModelAttribute Cours cours, @ModelAttribute TypeCours typecours) {
 		courRepo.save(cours);
-		this.typecours.save(typecours);
 		return new RedirectView("/");
 	}
 
+	@GetMapping("instruments")
+	public String AllerAInstruments() {
+		return "cours/list_instruments";
+	}
+
 	@GetMapping("cours")
-	public String AllerACours() {
+	public String AllerACours(ModelMap model) {
+		Iterable<Cours> cours = courRepo.findAll();
+		model.put("cours", cours);
+		model.put("type_cours", typecours.findAll());
 		return "cours/list_cours";
 	}
 
