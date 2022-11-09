@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,11 +22,15 @@ public class Cartes {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	private int NumCarte;
+	private long NumCarte;
 
 	private String DateExp;
 
 	private String nom;
 
 	private int Cvv;
+
+	@OneToOne
+	private Parent user;
+
 }
