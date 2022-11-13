@@ -26,29 +26,28 @@ public class CartesControlleur {
 	@Autowired
 	private IParentRepository parentRepo;
 
-	@GetMapping("formCarte")
-	public String formCarteLog() {
+	@GetMapping("myCard/{id}")
+	public String formCarteLog(ModelMap model,@AuthenticationPrincipal Parent authUSer) {
+		if(authUSer.getCarte()== null) {
+			Cartes cb=new Cartes();
+			cb.setUser(authUSer);
+			authUSer.setCarte(cb);
+			carteRepo.save(cb);
+		}
+		
+		model.put("userCo",authUSer);
 		return "/user/FormCartes";
 	}
 
-	@PostMapping("formCarte")
-	public RedirectView addCarte(@AuthenticationPrincipal Parent authUSer, @ModelAttribute Cartes carte) {
-		carte.setUser(authUSer);
-		carteRepo.save(carte);
-
+	@PostMapping("myCard/edit")
+	public RedirectView addCarte(ModelMap model,@AuthenticationPrincipal Parent authUSer, @ModelAttribute Cartes carte) {
+		int toChange = authUSer.getCarte().getId();
+		Cartes toAdd =carte;
+		toAdd.setId(toChange);
+		toAdd.setUser(authUSer);
+		authUSer.setCarte(toAdd);
+		carteRepo.save(toAdd);
 		return new RedirectView("/");
 	}
 
-	@GetMapping("edit/{id}")
-	public String editCarte(ModelMap model, @PathVariable int id) {
-		Optional<Cartes> carte = carteRepo.findById(id);
-		model.put("carte", carte.get());
-		return "/user/editCarte";
-	}
-
-	@PostMapping("editCarte")
-	public RedirectView updateCard(@PathVariable int id, @ModelAttribute Cartes carte) {
-		carteRepo.save(carte);
-		return new RedirectView("/");
-	}
 }

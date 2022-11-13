@@ -5,16 +5,16 @@
   <div class="column">
     <h2 class="ui black">
       <div class="content">
-        Enregister un moyen de paiement
+        Ajouter  un enfant 
       </div>
     </h2>
-    <form class="ui large form" method="post" action="edit">
+    <form class="ui large form" method="post" action="/myKids/add">
       <div class="ui stacked segment">
         
         <div class="field">
           <div class="ui left icon input">
             <i class="credit card icon"></i>
-            <input type="text" name="NumCarte" placeholder="Numéros de Carte Bleue">
+            <input type="text" name="prenom" placeholder="Prenom de l'enfant">
           </div>
         </div>
         
@@ -25,25 +25,19 @@
 		    <div class="field">
 	        	<div class="ui left icon input">
 	           		<i class="calendar alternate outline icon"></i>
-	           	 	<input type="text" name="DateExp" placeholder="Date d'expiration de la carte">
+	           	 	<input type="text" name="nom" placeholder="Nom de l'enfant">
 	           	 	</div>
 	        </div>
 	        <div class="field">
 		        <div class="ui left icon input">
 		           	<i class="copyright icon"></i>
-		        	<input type="text" name="Cvv" placeholder="CVV">
+		        	<input type="int" name="age" placeholder="Age de l'enfant">
 	        	</div>
 	    	</div>
 	    </div>
-        <div class="field">
-	        	<div class="ui left icon input">
-	           		<i class="user icon"></i>
-	           	 	<input type="text" name="nom" placeholder="Nom du propriètaire">
-	         	</div>
-	        </div>
         <div class="mini-spacer"></div>
         <a href="/" class="ui large red button">Annuler</a>
-        <button class="ui large red submit button">Ajouter un moyen de paiement</button>
+        <button class="ui large red submit button">Ajouter l'enfant</button>
       
       </div>
 

@@ -2,6 +2,7 @@ package viikingit.emusic.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,8 +30,7 @@ public class MainController {
 
 	@GetMapping("")
 	public String index(ModelMap model, @AuthenticationPrincipal Parent authUser) {
-		Iterable<Parent> parents = parentRepo.findAll();
-		// model.put("userCo", parents);
+		model.put("userCo", authUser);
 		return "index";
 	}
 
@@ -58,9 +58,5 @@ public class MainController {
 		return new RedirectView("/");
 	}
 
-	@GetMapping("cours")
-	public String AllerACours() {
-		return "cours/list_cours";
-	}
 
 }

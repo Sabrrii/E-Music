@@ -49,6 +49,13 @@ public class Parent implements UserDetails {
 
 	@OneToOne(mappedBy = "user")
 	private Cartes carte;
+	
+	
+	public void addKid(Enfant enf) {
+		if (enfants.add(enf)) {
+			enf.setParent(this);
+		}
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
