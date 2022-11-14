@@ -10,7 +10,7 @@
 <div class="spacer"></div>
   		
 {{#cours}}
-{{#type_cours}}
+
 <div class="ui horizontal cards">
   <div class="card">
     <div class="image">
@@ -19,10 +19,10 @@
     <div class="content">
       <div class="header"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{libelle}}</font></font></div>
       <div class="meta">
-        <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{libelleType}}</font></font></p>
+        {{#type_cours}}<p value="{{id}}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{libelleType}}</font></font></p>{{/type_cours}}
       </div>
       <div class="description"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        Assister au {{libelle}}, de {{ageMini}} ans à {{ageMaxi}} ans, pour apprendre "{instrument}"
+        Assister au <span style="font-weight: bold;">{{libelle}}</span>, de <span style="font-weight: bold;">{{ageMini}}</span> ans à <span style="font-weight: bold;">{{ageMaxi}}</span> ans, pour apprendre <span style="font-weight: bold;">"{instrument}"
       </font></font></div>
       <div class="ui button">
       <i class="add icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
@@ -31,7 +31,7 @@
     </div>
   </div>
 </div> 
-{{/type_cours}}
+
 {{/cours}}
 
 <p>

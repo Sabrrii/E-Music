@@ -47,7 +47,7 @@ public class CoursController {
 	public String listCours(ModelMap model, @AuthenticationPrincipal Parent authUser) {
 		Iterable<Cours> cours = courRepo.findAll();
 		model.put("cours", cours);
-		model.put("type_cours", typecours.findAll());
+		model.put("type_cours", typecours.findById();
 		model.put("userCo", authUser);
 		return "cours/list_cours";
 	}
