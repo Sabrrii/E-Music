@@ -45,6 +45,9 @@ public class CoursController {
 
 	@GetMapping("listCours")
 	public String listCours(ModelMap model, @AuthenticationPrincipal Parent authUser) {
+		Iterable<Cours> cours = courRepo.findAll();
+		model.put("cours", cours);
+		model.put("type_cours", typecours.findAll());
 		model.put("userCo", authUser);
 		return "cours/list_cours";
 	}
@@ -56,16 +59,8 @@ public class CoursController {
 	}
 
 	@GetMapping("instruments")
-	public String AllerAInstruments() {
+	public String AllerAInstruments(ModelMap model, @AuthenticationPrincipal Parent authUser) {
+		model.put("userCo", authUser);
 		return "cours/list_instruments";
 	}
-
-	@GetMapping("cours")
-	public String AllerACours(ModelMap model) {
-		Iterable<Cours> cours = courRepo.findAll();
-		model.put("cours", cours);
-		model.put("type_cours", typecours.findAll());
-		return "cours/list_cours";
-	}
-
 }
