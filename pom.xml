@@ -89,6 +89,7 @@
 	</dependencies>
 
 	<build>
+	<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -103,6 +104,29 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		 <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+        </resource>
+    </resources>
 	</build>
-
+	<profiles>
+	    <profile>
+	        <id>dev</id>
+	        <activation>
+	            <activeByDefault>true</activeByDefault>
+	        </activation>
+	        <properties>
+	            <activeProfile>dev</activeProfile>
+	        </properties>
+	    </profile>
+	 
+	    <profile>
+	        <id>prod</id>
+	        <properties>
+	            <activeProfile>prod</activeProfile>
+	        </properties>
+	    </profile>
+	</profiles>
 </project>
