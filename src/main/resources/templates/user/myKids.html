@@ -1,20 +1,14 @@
 {{ > /include/header}}
-{{> /include/header_bar}}
+{{> /include/menu_account}}
 
-<div class="ui  inverted menu">
-  <div class="item">
-    <a href= "/myCard" class="ui inverted button">Mon moyen de paiement</a>
-  </div>
-  <div class="item">
-    <a href= "/myKids" class="ui inverted button">Mes Enfants</a>
-  </div>
-    <div class="item">
-    <a href= "/myLesson" class="ui inverted button">Mes Cours</a>
-  </div>
+<div class="pusher">
+	    <div class="ui inverted vertical center aligned segment">
+	        <h1 class="ui inverted header"><div class="ui medium images"><img src="img/logo.png"></div>Mes enfants enregistrées</h1>
+	    </div>
 </div>
 
 
-    {{#enfant}}
+{{#enfant}}
 <div>
 <div>
 <a href="/myKids/add/{{id}}" class="ui red button">Ajouter un enfant</a>
@@ -28,7 +22,7 @@
   <tbody>
     <tr>
 
-      <td data-label="Nom"></td>
+      <td data-label="Nom">{{getNomEnfants}}</td>
       <td data-label="Age"></td>
       <td data-label=""><i class="pen square icon"></i>
       					<i class="pen square icon"></i></td>
