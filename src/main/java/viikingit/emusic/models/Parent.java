@@ -49,12 +49,19 @@ public class Parent implements UserDetails {
 
 	@OneToOne(mappedBy = "user")
 	private Cartes carte;
-	
-	
+
 	public void addKid(Enfant enf) {
 		if (enfants.add(enf)) {
 			enf.setParent(this);
 		}
+	}
+
+	public List<String> getNomEnfants() {
+		List<String> enfs = new ArrayList<>();
+		for (Enfant enf : enfants) {
+			enfs.add(enf.getNom());
+		}
+		return enfs;
 	}
 
 	@Override
