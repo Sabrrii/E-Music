@@ -22,9 +22,11 @@ public class TypeCours {
 	private int id;
 
 	// Le libelle est soit "individuel" ou "collectif"
-	private enum libelle {
-		individuel, collectif
-	}
+	// private enum libelleType {
+	// individuel, collectif
+	// }
+
+	private String libelleType;
 
 	@OneToMany(mappedBy = "typeCour")
 	private List<Cours> tCours;
