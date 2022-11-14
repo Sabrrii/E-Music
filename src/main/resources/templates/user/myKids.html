@@ -1,0 +1,43 @@
+{{ > /include/header}}
+{{> /include/header_bar}}
+
+<div class="ui  inverted menu">
+  <div class="item">
+    <a href= "/myCard" class="ui inverted button">Mon moyen de paiement</a>
+  </div>
+  <div class="item">
+    <a href= "/myKids" class="ui inverted button">Mes Enfants</a>
+  </div>
+    <div class="item">
+    <a href= "/myLesson" class="ui inverted button">Mes Cours</a>
+  </div>
+</div>
+
+
+    {{#enfant}}
+<div>
+<div>
+<a href="/myKids/add/{{id}}" class="ui red button">Ajouter un enfant</a>
+</div>
+<table class="ui celled table">
+  <thead>
+    <tr><th>Nom</th>
+    <th>Age</th>
+    <th></th>
+  </tr></thead>
+  <tbody>
+    <tr>
+
+      <td data-label="Nom"></td>
+      <td data-label="Age"></td>
+      <td data-label=""><i class="pen square icon"></i>
+      					<i class="pen square icon"></i></td>
+    </tr>
+    {{/enfant}}
+  </tbody>
+</table>
+</div>
+
+ 
+ 
+ {{ >/include/footer}}

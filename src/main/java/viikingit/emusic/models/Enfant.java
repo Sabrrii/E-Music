@@ -11,12 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Enfant {
 
 	@Id
@@ -29,7 +33,7 @@ public class Enfant {
 	@Column(length = 30)
 	private String prenom;
 
-	private Date dateNaiss;
+	private int age;
 
 	@ManyToOne()
 	private Parent parent;
@@ -37,14 +41,4 @@ public class Enfant {
 	@OneToMany(mappedBy = "enfant")
 	private List<Inscriptions> inscriptions;
 
-	public Enfant() {
-		this.nom = "";
-		this.prenom = "";
-	}
-
-	public Enfant(String nom, String prenom, Date naiss) {
-		this.nom = nom;
-		this.prenom = prenom;
-		this.dateNaiss = naiss;
-	}
 }

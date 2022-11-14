@@ -1,8 +1,10 @@
 package viikingit.emusic.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.repository.IParentRepository;
 import viikingit.emusic.service.DbUserLoginService;
+import viikingit.emusic.service.EmailServiceImpl;
 
 @Controller
 public class MainController {
@@ -21,8 +24,12 @@ public class MainController {
 	@Autowired
 	private UserDetailsService uService;
 
+	@Autowired
+	private EmailServiceImpl email;
+
 	@GetMapping("")
-	public String index() {
+	public String index(ModelMap model, @AuthenticationPrincipal Parent authUser) {
+		model.put("userCo", authUser);
 		return "index";
 	}
 
@@ -35,7 +42,8 @@ public class MainController {
 	public RedirectView addParent(@ModelAttribute Parent parent) {
 		Parent par = ((DbUserLoginService) uService).createUser(parent);
 		parentRepo.save(par);
-		return new RedirectView("");
+		email.sendSimpleMessage(parent.getUsername(), "Confirmation d'email", "Ceci est un test");
+		return new RedirectView("/");
 	}
 
 	@GetMapping("login")
@@ -43,10 +51,10 @@ public class MainController {
 		return "/user/login";
 	}
 
-	/*
-	 * @PostMapping("login") public log() {
-	 * 
-	 * }
-	 */
+	@PostMapping("logout")
+	public RedirectView logout() {
+
+		return new RedirectView("/");
+	}
 
 }
