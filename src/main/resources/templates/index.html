@@ -11,16 +11,16 @@
 	        	<a class="toc item">
 	            	<i class="sidebar icon"></i>
 	          	</a>
-	          	<a  href="/"class=" item">Accueil</a>
-	          	<a  href="/listCours"class=" item">List des cours</a>
-	          	<a  href="/instruments"class=" item">List des instruments</a>
+	          	<a  href="./"class=" item">Accueil</a>
+	          	<a  href="./listCours"class=" item">List des cours</a>
+	          	<a  href="./instruments"class=" item">List des instruments</a>
 	        	<div class="right item">
 	          	     {{#userCo}}
 	         			<a  href="/logout" class="ui inverted button">Déconnexion</a>
 	        		 {{/userCo}}
 	        		 {{^userCo}}
-	        		 	 <a  href="/login" class="ui inverted button">Connexion</a>
-	        		 	 <a href= "/signup" class="ui inverted button">Inscription</a>
+	        		 	 <a  href="./login" class="ui inverted button">Connexion</a>
+	        		 	 <a href= "./signup" class="ui inverted button">Inscription</a>
 	        		 {{/userCo}}
 	          </div>
 </div>
@@ -34,10 +34,10 @@
 	        	<h1>Bienvenue sur votre espace {{Prenom}}</h1>
 	        <div class="container-button" style="display: flex;flex-wrap: nowrap; margin: 46px; align-content: center; justify-content: center; flex-direction: column;
 												        ">
-		        <a href ="/account/{{id}}" class="ui red huge primary button"><i class="user tie icon" style="visibility: visible;"></i>Mon compte</a>
-		        <a href ="/myCard/{{id}}" class="ui red huge primary button"><i class="credit card icon" style="visibility: visible;"></i>Mes paiement</a>
-		        <a href ="/myKids/{{id}}" class="ui red huge primary button"><i class="child icon" style="visibility: visible;"></i>Mes enfants</a>
-		        <a href ="/myLesson" class="ui huge red primary button"><i class="book icon" style="visibility: visible;"></i>Mes cours</a>
+		        <a href ="./account/{{id}}" class="ui red huge primary button"><i class="user tie icon" style="visibility: visible;"></i>Mon compte</a>
+		        <a href ="./myCard/{{id}}" class="ui red huge primary button"><i class="credit card icon" style="visibility: visible;"></i>Mes paiement</a>
+		        <a href ="./myKids/{{id}}" class="ui red huge primary button"><i class="child icon" style="visibility: visible;"></i>Mes enfants</a>
+		        <a href ="./myLesson" class="ui huge red primary button"><i class="book icon" style="visibility: visible;"></i>Mes cours</a>
 	        </div>
 	        {{/userCo}}
 	      </div>

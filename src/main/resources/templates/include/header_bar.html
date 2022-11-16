@@ -9,16 +9,16 @@
 	        	<a class="toc item">
 	            	<i class="sidebar icon"></i>
 	          	</a>
-	          	<a  href="/"class=" item">Accueil</a>
-	          	<a  href="/listCours"class=" item">List des cours</a>
-	          	<a  href="/instruments"class=" item">List des instruments</a>
+	          	<a  href="./"class=" item">Accueil</a>
+	          	<a  href="./listCours"class=" item">List des cours</a>
+	          	<a  href="./instruments"class=" item">List des instruments</a>
 	        	<div class="right item">
 	          	     {{#userCo}}
-	         			<a  href="/logout" class="ui inverted button">Déconnexion</a>
+	         			<a  href="./logout" class="ui inverted button">Déconnexion</a>
 	        		 {{/userCo}}
 	        		 {{^userCo}}
-	        		 	 <a  href="/login" class="ui inverted button">Connexion</a>
-	        		 	 <a href= "/signup" class="ui inverted button">Inscription</a>
+	        		 	 <a  href="./login" class="ui inverted button">Connexion</a>
+	        		 	 <a href= "./signup" class="ui inverted button">Inscription</a>
 	        		 {{/userCo}}
 	          </div>
 	        </div>
