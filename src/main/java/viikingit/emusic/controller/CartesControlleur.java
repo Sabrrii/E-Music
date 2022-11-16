@@ -45,7 +45,7 @@ public class CartesControlleur {
 		toAdd.setUser(authUSer);
 		authUSer.setCarte(toAdd);
 		carteRepo.save(toAdd);
-		return new RedirectView("/");
+		return new RedirectView("./");
 	}
 
 }
