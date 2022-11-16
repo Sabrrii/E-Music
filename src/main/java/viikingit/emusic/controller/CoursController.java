@@ -7,7 +7,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.view.RedirectView;
 
 import viikingit.emusic.models.Cours;
 import viikingit.emusic.models.Parent;
@@ -53,9 +52,9 @@ public class CoursController {
 	}
 
 	@PostMapping("newCours")
-	public RedirectView newSubmitCours(@ModelAttribute Cours cours, @ModelAttribute TypeCours typecours) {
+	public String newSubmitCours(@ModelAttribute Cours cours, @ModelAttribute TypeCours typecours) {
 		courRepo.save(cours);
-		return new RedirectView("/");
+		return "cours/list_cours";
 	}
 
 	@GetMapping("instruments")

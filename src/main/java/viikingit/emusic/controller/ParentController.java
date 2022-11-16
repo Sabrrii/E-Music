@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.view.RedirectView;
 
 import io.github.jeemv.springboot.vuejs.VueJS;
 import viikingit.emusic.models.Enfant;
@@ -44,12 +43,12 @@ public class ParentController {
 	}
 
 	@PostMapping("account/edit/{id}")
-	public RedirectView edited(@ModelAttribute Parent parent, @PathVariable int id) {
+	public String edited(@ModelAttribute Parent parent, @PathVariable int id) {
 		Parent toSave = parRepo.findById(id).get();
 		;
 		toSave = parent;
 		parRepo.save(toSave);
-		return new RedirectView("/");
+		return "index";
 	}
 
 	@GetMapping("myKids/{id}")
@@ -68,10 +67,10 @@ public class ParentController {
 	}
 
 	@PostMapping("myKids/add")
-	public RedirectView addKid(@ModelAttribute Enfant enfant, @AuthenticationPrincipal Parent authUser) {
+	public String addKid(@ModelAttribute Enfant enfant, @AuthenticationPrincipal Parent authUser) {
 		authUser.addKid(enfant);
 		enfRepo.save(enfant);
-		return new RedirectView("/");
+		return "myKids/{id}";
 	}
 
 }
