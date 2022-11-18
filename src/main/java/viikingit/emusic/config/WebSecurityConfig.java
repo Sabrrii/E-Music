@@ -18,8 +18,8 @@ public class WebSecurityConfig {
 	@Bean // (2)
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/**", "/h2-console/**", "/webjars/**", "/img/**", "/style/**", "/dist/**", "/css/**",
-						"/js/**", "/img/**", "static/**")
+				.antMatchers("/**", "/img/**", "/h2-console/**", "/webjars/**", "/img/**", "/style/**", "/dist/**",
+						"/css/**", "/js/**", "static/**")
 				.permitAll() // (3)
 				.anyRequest().authenticated() // (4)
 				.and().formLogin() // (5)
@@ -30,6 +30,8 @@ public class WebSecurityConfig {
 		http.csrf().disable();
 		return http.build();
 	}
+
+	String[] staticResources = { "/style/**", "/img/**", "/fonts/**", "/scripts/**", };
 
 	@Bean
 	public UserDetailsService userDetailsService() {

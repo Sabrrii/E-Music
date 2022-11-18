@@ -7,7 +7,11 @@
 	    </div>
 </div>
 
-<div class="spacer"></div>
+<div class="mini_spacer">
+<a href="/newCours" class="ui fluid large red submit button" >Ajouter un nouveau cours</a>
+</div>
+
+<div class="mini_spacer"></div>
   		
 {{#cours}}
 
@@ -24,24 +28,19 @@
       <div class="description"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
         Assister au <span style="font-weight: bold;">{{libelle}}</span>, de <span style="font-weight: bold;">{{ageMini}}</span> ans à <span style="font-weight: bold;">{{ageMaxi}}</span> ans, pour apprendre <span style="font-weight: bold;">"{instrument}"
       </font></font></div>
+      <div class="mini_spacer"></div>
       <div class="ui button">
       <i class="add icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
       Participer au cours
     </font></font></div>
+    <i class="user circle icon" style="visibility: visible;">{{nbPlaces}}</i>
+	<a href="/editCours/{{id}}" class="ui red mini icon button"><i class="edit icon" style="visibility: visible;"></i></a>
+	<a href="/delete/{{id}}#delete-message" class="ui red mini icon button"><i class="trash alternate icon" style="visibility: visible;"></i></a>
     </div>
   </div>
-</div> 
+</div>
 
 {{/cours}}
-
-<p>
-
-
-</p>
-
-
-
-
 
 
 {{> /include/footer }}

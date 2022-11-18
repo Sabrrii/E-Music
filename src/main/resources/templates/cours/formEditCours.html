@@ -1,9 +1,11 @@
 {{> /include/header }}
 {{> /include/header_bar }}
 
+
+{{#cours}}
 <div class="pusher">
 	    <div class="ui inverted vertical center aligned segment">
-	        <h1 class="ui inverted header"><div class="ui medium images"><img src="img/logo.png"></div>Ajouter un nouveau cours</h1>
+	        <h1 class="ui inverted header"><div class="ui medium images"><img src="/img/logo.png"></div>Editer "{{libelle}}"</h1>
 	    </div>
 </div>
 
@@ -22,13 +24,13 @@
         <div class="field">
           <div class="ui left icon input">
             <i class="music icon" ></i>
-            <input type="text" name="libelle" placeholder="Nom du cours">
+            <input type="text" name="libelle" value="{{libelle}}">
           </div>
         </div>
         <div class="field">
          <div class="ui left icon input">
          <i class="user friends icon" style="visibility: visible;"></i>
-           <input type="number" name="nbPlaces" placeholder="Nombre de places disponible">
+           <input type="number" name="nbPlaces" value="{{nbPlaces}}">
           </div>
         </div>
         <div class="mini-spacer"></div>
@@ -39,8 +41,8 @@
 	        <div class="field">
 	            <label>Type de cours</label>
 	      			<select name="typeCour" class="ui fluid dropdown">
-	      				<option value="">--Choisir un type de cours--</option>
 		      			{{#type_cours}}
+		      			<option value="">--Choisir un type de cours--</option>
 	      				<option value="{{id}}">{{libelleType}}</option>
 	    				{{/type_cours}}
 	     			</select>
@@ -60,7 +62,7 @@
 	        <div class="field">
 	            <label>Âge minimum</label>
 	      			<select type="number" name="ageMini" class="ui fluid dropdown">
-	      				<option value="">--Choisir un âge minimum--</option>
+	      				<option value="{{ageMini}}">{{ageMini}}</option>
 	      				<option value=3>3</option>
 	      				<option value=4>4</option>
 	      				<option value=5>5</option>
@@ -85,7 +87,7 @@
 	        <div class="field">
 	        	<label>Âge maximum</label>
 	      			<select type="int" name="ageMaxi" class="ui fluid dropdown">
-	      				<option value="">--Choisir un âge maximum--</option>
+	      				<option value="{{ageMaxi}}">{{ageMaxi}}</option>
 	        			<option value=100>100</option>
 	    				<option value=60>60</option>
 	    				<option value=50>50</option>
@@ -115,7 +117,7 @@
         
         <div class="little_spacer"></div>
         <a href="/listCours" class="ui large red button">Annuler</a>
-        <button  type="submit" class="ui large red submit button" >Ajouter un nouveau cours</button>
+        <button  type="submit" class="ui large red submit button" >Enregistrer les modifications</button>
       
       </div>
 
@@ -125,5 +127,7 @@
 
   </div>
 </div>
+
+{{/cours}}
 
 {{> /include/footer }}
