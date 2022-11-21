@@ -1,5 +1,18 @@
-<div id="app" class="ui container">
+
+ <!-- Sidebar Menu -->
+<div class="ui vertical inverted sidebar menu">
+  <a class="active item">Accueil</a>
+  <a class="item">Liste des cours</a>
+  <a class="item">Listes des instruments</a>
+   {{^userCo}}
+  <a class="item">Connexion</a>
+  <a class="item">Inscription</a>
+  {{/userCo}}
+  {{#userCo}}
+  <a  href="/logout" class="ui inverted button">Déconnexion</a>
+   {{/userCo}}
 </div>
+ 
   
   
 <div class="pusher">
@@ -9,9 +22,9 @@
 	        	<a class="toc item">
 	            	<i class="sidebar icon"></i>
 	          	</a>
-	          	<a  href="/"class=" item">Accueil</a>
-	          	<a  href="/listCours"class=" item">List des cours</a>
-	          	<a  href="/instruments"class=" item">List des instruments</a>
+	          	<a  href="/"class="active item">Accueil</a>
+	          	<a  href="/listCours"class=" item">Liste des cours</a>
+	          	<a  href="/instruments"class=" item">Liste des instruments</a>
 	        	<div class="right item">
 	          	     {{#userCo}}
 	         			<a  href="/logout" class="ui inverted button">Déconnexion</a>

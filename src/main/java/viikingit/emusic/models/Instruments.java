@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +22,6 @@ public class Instruments {
 
 	private String intitule;
 
-	@ManyToMany
-	private List<Cours> cour;
+	@OneToMany(mappedBy = "instruments")
+	private List<Cours> iCours;
 }

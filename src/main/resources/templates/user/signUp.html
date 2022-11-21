@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Site Properties -->
-  <title>Login Example - Semantic</title>
+  <title>E-music</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.0/semantic.min.css" integrity="sha512-PwhgdrueUt7iVICnZMjYcbiLalCztrVfzUIYXekIK8hZu4DQP141GrKh6fUHmNERWi4bGdBXIZqtBZnsSzHEMg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" type="text/css" href="style/reset.css">
   <link rel="stylesheet" type="text/css" href="style/site.css">
@@ -53,7 +53,7 @@
 <div class="ui middle aligned center aligned grid">
   <div class="column">
     <h2 class="ui teal image header">
-      <img src="assets/images/logo.png" class="image">
+      <img src="/img/icon.png" class="image">
       <div class="content" style="color:black;">
         Inscription
       </div>
@@ -65,10 +65,10 @@
 	      <div class="ui form">
 	 		 <div class="fields">
 			    <div class="field">
-			      <input required="required" type="text" name="prenom" placeholder="prénom">
+			      <input required="required" type="text" name="prenom" placeholder="Prénom *">
 			    </div>
 			    <div class="field">
-			      <input required="required" type="text"  name ="nom" placeholder="nom">
+			      <input required="required" type="text"  name ="nom" placeholder="Nom *">
 			   </div>
 			 </div>
 		</div>
@@ -76,51 +76,59 @@
 		<div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input  required="required" type="text" name="username" placeholder=" addresse E-mail ">
+            <input  required="required" type="text" name="username" placeholder="Addresse E-mail *">
           </div>
         </div>
         
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="Mot de passe">
+            <input type="password" name="password" placeholder="Mot de passe *">
           </div>
         </div>
 		
 		<div class="field">
 			<div class="ui left icon input">
 				<i class="home icon"></i>
-				<input required="required" type="text"  name="adresse" placeholder="adresse de résidence">
+				<input required="required" type="text"  name="adresse" placeholder="Adresse de résidence *">
 			</div>
 		</div>
 		
 		<div class="field">
 			<div class="ui left icon input">
 				<i class="city icon"></i>
-				<input required="required" type="text"  name="ville" placeholder="ville">
+				<input required="required" type="text"  name="ville" placeholder="Ville *">
 			</div>
 		</div>
 		
 		<div class="field">
 			<div class="ui left icon input">
-				<input required="required" type="number"  name="quotientFamilial " value ="0" placeholder="quotient familliale">
+				<i class="calculator icon" style="visibility: visible;"></i>
+				<input required="required" type="number"  name="quotientFamilial "  placeholder="Quotient famillial *">
 			</div>
 		</div>
 
 	     <div class="ui form">
 	 		 <div class="fields">
 			    <div class="field">
-			      <input required="required" type="text" name="tel1" placeholder="Telephone">
+			    	<div class="ui left icon input">
+			    		<i class="phone alternate icon" style="visibility: visible;"></i>
+			      		<input required="required" type="text" name="tel1" placeholder="Telephone *">
+			    	</div>
 			    </div>
 			    <div class="field">
-			      <input type="text"  name ="tel2" placeholder="Telephone">
-			   </div>
-			 </div>		
-
+   			      	<input type="text"  name ="tel2" placeholder="Telephone ">
+			   	</div>	
+				</div>
+				 <p class="item"><div class="ui label">Les champs marqués d'un * sont obligatoires</div></p>
       </div>
-		<button class="ui fluid large red submit button" >Login</button>
+		<button class="ui fluid large red submit button" >S'inscrire</button>
 	</div>
     </form>
+    
+    <div class="ui message">
+     Déjà un compte ? <a href="/login">Se connecter</a>
+    </div>
     
     
    <!-- <script src="static/js/verifTel"></script> --> 
