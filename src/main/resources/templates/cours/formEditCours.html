@@ -42,7 +42,6 @@
 	            <label>Type de cours</label>
 	      			<select name="typeCour" class="ui fluid dropdown">
 		      			{{#type_cours}}
-		      			<option value="">--Choisir un type de cours--</option>
 	      				<option value="{{id}}">{{libelleType}}</option>
 	    				{{/type_cours}}
 	     			</select>
@@ -50,7 +49,6 @@
 	        <div class="field">
 	        	<label>Instruments</label>
 	      			<select name="instrument" class="ui fluid dropdown">
-	      				<option value="">--Choisir un instrument--</option>
 	      				{{#instrument}}
 	        			<option value="{{id}}">{{intitule}}</option>
 	    				{{/instrument}}

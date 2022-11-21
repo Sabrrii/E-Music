@@ -36,7 +36,7 @@ public class CoursController {
 	public String newCours(ModelMap model, @AuthenticationPrincipal Parent authUser) {
 		model.addAttribute("cours", new Cours());
 		model.addAttribute("type_cours", typecours.findAll());
-		model.addAttribute("instrument", instruments.findAll());
+		model.addAttribute("instruments", instruments.findAll());
 		model.put("userCo", authUser);
 		return "cours/formNewCours";
 	}
@@ -52,6 +52,7 @@ public class CoursController {
 		Iterable<Cours> cours = courRepo.findAll();
 		model.put("cours", cours);
 		model.put("type_cours", typecours.findAll());
+		model.put("instruments", instruments.findAll());
 		model.put("userCo", authUser);
 		return "cours/list_cours";
 	}
@@ -67,6 +68,8 @@ public class CoursController {
 		model.put("userCo", authUser);
 		return "cours/list_instruments";
 	}
+
+	// SABRI REGARDE LA METHODE MODIF
 
 	@GetMapping("editCours/{id}")
 	public String formEditCours(ModelMap model, @PathVariable int id) {

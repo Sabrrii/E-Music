@@ -26,7 +26,7 @@
         {{#type_cours}}<p value="{{id}}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{libelleType}}</font></font></p>{{/type_cours}}
       </div>
       <div class="description"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        Assister au <span style="font-weight: bold;">{{libelle}}</span>, de <span style="font-weight: bold;">{{ageMini}}</span> ans à <span style="font-weight: bold;">{{ageMaxi}}</span> ans, pour apprendre <span style="font-weight: bold;">"{instrument}"
+        Assister au <span style="font-weight: bold;">{{libelle}}</span>, de <span style="font-weight: bold;">{{ageMini}}</span> ans à <span style="font-weight: bold;">{{ageMaxi}}</span> ans, pour apprendre {{#instruments}}<span style="font-weight: bold;">{{intitule}}{{/instruments}}
       </font></font></div>
       <div class="mini_spacer"></div>
       <div class="ui button">
@@ -41,6 +41,8 @@
 </div>
 
 {{/cours}}
+
+<div class="mini_spacer"></div>
 
 
 {{> /include/footer }}
