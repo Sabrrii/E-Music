@@ -101,4 +101,10 @@ public class CoursController {
 		courRepo.deleteById(id);
 		return new RedirectView("/listCours");
 	}
+
+	@GetMapping("emploi_du_temps")
+	public String edt(ModelMap model, @AuthenticationPrincipal Parent authUser) {
+		model.put("userCo", authUser);
+		return "cours/edt";
+	}
 }
