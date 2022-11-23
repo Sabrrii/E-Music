@@ -103,7 +103,7 @@ public class CoursController {
 	}
 
 	@GetMapping("emploi_du_temps")
-	public String edt(ModelMap model, @AuthenticationPrincipal Parent authUser) {
+	public String show_edt(ModelMap model, @AuthenticationPrincipal Parent authUser) {
 		model.put("userCo", authUser);
 		return "cours/edt";
 	}
