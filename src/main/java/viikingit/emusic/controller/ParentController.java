@@ -1,6 +1,11 @@
 package viikingit.emusic.controller;
 
+
+import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,7 +31,8 @@ public class ParentController {
 
 	@Autowired
 	IEnfantRepository enfRepo;
-
+	
+	
 	@Autowired
 	private VueJS vue;
 
@@ -52,9 +58,14 @@ public class ParentController {
 	}
 
 	@GetMapping("myKids/{id}")
-	public String myKids(ModelMap model, @AuthenticationPrincipal Parent authUser) {
-		Optional<Parent> opt = parRepo.findById(authUser.getId());
-		opt.ifPresent(orga -> model.put("enfant", orga));
+	public String myKids(ModelMap model,@AuthenticationPrincipal Parent authUser) {
+		Optional<Parent> opt =parRepo.findById(authUser.getId());
+		List<Enfant> enfs= enfRepo.findByParent(authUser);
+		opt.ifPresent(orga -> model.put("enfant",orga));
+		model.put("enf", enfs);
+
+		
+		
 
 		model.put("userCo", authUser);
 		return "user/myKids";
@@ -67,10 +78,30 @@ public class ParentController {
 	}
 
 	@PostMapping("myKids/add")
-	public RedirectView addKid(@ModelAttribute Enfant enfant, @AuthenticationPrincipal Parent authUser) {
-		authUser.addKid(enfant);
+	public RedirectView addKid(@ModelAttribute Enfant enfant,@AuthenticationPrincipal Parent authUser) {
+		Optional<Parent> par = parRepo.findById(authUser.getId());
+		Parent Test = par.get();
+		Test.addKid(enfant);
 		enfRepo.save(enfant);
 		return new RedirectView("/");
 	}
-
+	
+	
+	
+	@GetMapping("/account/delete/{id}")
+	public RedirectView deleteConfirm(@PathVariable int id ,HttpServletRequest request) {
+		parRepo.deleteById(id);
+		HttpSession session = request.getSession();
+		session.invalidate();
+		session = request.getSession(false);
+		return new RedirectView("/"); 
+	}
+	
+	@GetMapping("/signUpLesson")
+	public RedirectView signUpLesson() {
+		
+		return new RedirectView("/myLesson");
+	}
+	
+	
 }

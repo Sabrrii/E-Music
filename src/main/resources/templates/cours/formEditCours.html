@@ -18,7 +18,7 @@
         
       </div>
     </h2>
-    <form class="ui large form" method="post" action="/newCours">
+    <form class="ui large form" method="post" action="/editCours/{{id}}">
       <div class="ui stacked segment">
         
         <div class="field">
@@ -48,10 +48,10 @@
 	        </div>
 	        <div class="field">
 	        	<label>Instruments</label>
-	      			<select name="instrument" class="ui fluid dropdown">
-	      				{{#instrument}}
+	      			<select name="instruments" class="ui fluid dropdown">
+	      				{{#instruments}}
 	        			<option value="{{id}}">{{intitule}}</option>
-	    				{{/instrument}}
+	    				{{/instruments}}
 	     			</select>
 	        </div>
 	    </div>

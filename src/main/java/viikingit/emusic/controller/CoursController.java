@@ -32,14 +32,7 @@ public class CoursController {
 	@Autowired
 	private IInstrumentsRepository instruments;
 
-	@GetMapping("newCours")
-	public String newCours(ModelMap model, @AuthenticationPrincipal Parent authUser) {
-		model.addAttribute("cours", new Cours());
-		model.addAttribute("type_cours", typecours.findAll());
-		model.addAttribute("instruments", instruments.findAll());
-		model.put("userCo", authUser);
-		return "cours/formNewCours";
-	}
+
 
 	@GetMapping("myLesson")
 	public String myLesson(ModelMap model, @ModelAttribute Parent parent, @AuthenticationPrincipal Parent authUser) {
@@ -56,6 +49,16 @@ public class CoursController {
 		model.put("userCo", authUser);
 		return "cours/list_cours";
 	}
+	
+	@GetMapping("newCours")
+	public String newCours(ModelMap model, @AuthenticationPrincipal Parent authUser) {
+		model.addAttribute("cours", new Cours());
+		model.addAttribute("type_cours", typecours.findAll());
+		model.addAttribute("instruments", instruments.findAll());
+		model.put("userCo", authUser);
+		return "cours/formNewCours";
+	}
+	
 
 	@PostMapping("newCours")
 	public RedirectView newSubmitCours(@ModelAttribute Cours cours, @ModelAttribute TypeCours typecours) {
@@ -76,25 +79,20 @@ public class CoursController {
 		Optional<Cours> cour = courRepo.findById(id);
 		cour.ifPresent(cours -> model.put("cours", cours));
 		model.put("type_cours", typecours.findAll());
+		model.put("instruments", instruments.findAll());
 		return "cours/formEditCours";
 	}
 
-//	@GetMapping("editCours/{id}")
-//	public String edited(ModelMap model, @PathVariable int id) {
-//		courRepo.findById(id).ifPresent(cour -> model.put("cour", cour));
-//		return "/cours/formEditCours";
-
-	// Cours toSave = courRepo.findById(id).get();
-	// toSave.setLibelle(cours.getLibelle());
-	// toSave.setAgeMaxi(cours.getAgeMaxi());
-	// toSave.setAgeMini(cours.getAgeMini());
-	// toSave.setNbPlaces(cours.getNbPlaces());
-	// toSave.setInstrument(cours.getInstrument());
-	// toSave.setTypeCour(cours.getTypeCour());
-	// courRepo.save(toSave);
-	// return new RedirectView("/listCours");
-	// }
-
+	
+	@PostMapping("editCours/{id}")
+	public RedirectView coursEdited(@ModelAttribute Cours cour, @PathVariable int id) {
+		Cours toSave = courRepo.findById(id).get();
+		toSave = cour;
+		courRepo.save(toSave);
+		return new RedirectView("/listCours");
+	}
+	
+	
 	@GetMapping("delete/{id}")
 	public RedirectView deleteAction(@PathVariable int id, RedirectAttributes attrs) {
 		courRepo.findById(id);

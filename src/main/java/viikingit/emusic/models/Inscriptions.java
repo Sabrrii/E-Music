@@ -25,5 +25,8 @@ public class Inscriptions {
 
 	@ManyToOne
 	private Cours cours;
+	
+	@ManyToOne 
+	private Parent parent;
 
 }

@@ -22,17 +22,15 @@
     </div>
     <div class="content">
       <div class="header"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{libelle}}</font></font></div>
-      <div class="meta">
-        {{#type_cours}}<p value="{{id}}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{libelleType}}</font></font></p>{{/type_cours}}
-      </div>
+
       <div class="description"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
         Assister au <span style="font-weight: bold;">{{libelle}}</span>, de <span style="font-weight: bold;">{{ageMini}}</span> ans à <span style="font-weight: bold;">{{ageMaxi}}</span> ans, pour apprendre {{#instruments}}<span style="font-weight: bold;">{{intitule}}{{/instruments}}
       </font></font></div>
       <div class="mini_spacer"></div>
       <div class="ui button">
-      <i class="add icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      <a href="/signUpLesson"><i class="add icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
       Participer au cours
-    </font></font></div>
+    </font></font></div></a>
     <i class="user circle icon" style="visibility: visible;">{{nbPlaces}}</i>
 	<a href="/editCours/{{id}}" class="ui red mini icon button"><i class="edit icon" style="visibility: visible;"></i></a>
 	<a href="/delete/{{id}}#delete-message" class="ui red mini icon button"><i class="trash alternate icon" style="visibility: visible;"></i></a>
