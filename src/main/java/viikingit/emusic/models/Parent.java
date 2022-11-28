@@ -3,6 +3,7 @@ package viikingit.emusic.models;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,14 +13,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import viikingit.emusic.repository.IEnfantRepository;
 
 @Getter
 @Setter
@@ -27,6 +31,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Parent implements UserDetails {
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,14 +55,24 @@ public class Parent implements UserDetails {
 
 	@OneToOne(mappedBy = "user")
 	private Cartes carte;
+	
+	
+	@OneToMany(mappedBy = "parent")
+	private List<Inscriptions> inscriptions;
+	
 
 	public void addKid(Enfant enf) {
-		if (enfants.add(enf)) {
-			enf.setParent(this);
+		Enfant temp = enf;
+		if(!enfants.contains(temp)) {
+			temp.setParent(this);
+			enfants.add(temp);
 		}
 	}
 
+
 	private String authorities = "PARENT";
+
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

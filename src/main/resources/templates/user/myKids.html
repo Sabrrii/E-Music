@@ -15,20 +15,20 @@
 </div>
 <table class="ui celled table">
   <thead>
-    <tr><th>Nom</th>
+    <tr><th>Prenom</th>
     <th>Age</th>
     <th></th>
   </tr></thead>
   <tbody>
     <tr>
 	{{#enf}}
-      <td data-label="Nom">{{prenom}}</td>
+      <td data-label="Prenom">{{prenom}}</td>
       <td data-label="Age">{{age}}</td>
-      <td data-label=""><i class="pen square icon"></i>
-      					<i class="pen square icon"></i></td>
+      <td data-label=""><i class="edit icon"></i>
+      					<i class="delete square icon"></i></td>
 
     </tr>
-          	{{/enf}}
+     {{/enf}}
     {{/enfant}}
   </tbody>
 </table>
