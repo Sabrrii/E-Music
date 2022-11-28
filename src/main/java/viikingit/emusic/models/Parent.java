@@ -57,14 +57,6 @@ public class Parent implements UserDetails {
 		}
 	}
 
-	public List<String> getNomEnfants() {
-		List<String> enfs = new ArrayList<>();
-		for (Enfant enf : enfants) {
-			enfs.add(enf.getNom());
-		}
-		return enfs;
-	}
-
 	private String authorities = "PARENT";
 
 	@Override

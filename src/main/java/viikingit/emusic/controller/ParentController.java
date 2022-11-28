@@ -1,9 +1,11 @@
 package viikingit.emusic.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import viikingit.emusic.models.Enfant;
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.repository.IEnfantRepository;
 import viikingit.emusic.repository.IParentRepository;
+import viikingit.emusic.service.DbUserLoginService;
 
 @Controller
 public class ParentController {
@@ -26,6 +29,9 @@ public class ParentController {
 
 	@Autowired
 	IEnfantRepository enfRepo;
+
+	@Autowired
+	private UserDetailsService uService;
 
 	@Autowired
 	private VueJS vue;
@@ -54,8 +60,9 @@ public class ParentController {
 	@GetMapping("myKids/{id}")
 	public String myKids(ModelMap model, @AuthenticationPrincipal Parent authUser) {
 		Optional<Parent> opt = parRepo.findById(authUser.getId());
+		List<Enfant> enfs = enfRepo.findByParent(authUser);
 		opt.ifPresent(orga -> model.put("enfant", orga));
-
+		model.put("enf", enfs);
 		model.put("userCo", authUser);
 		return "user/myKids";
 	}
@@ -68,9 +75,12 @@ public class ParentController {
 
 	@PostMapping("myKids/add")
 	public RedirectView addKid(@ModelAttribute Enfant enfant, @AuthenticationPrincipal Parent authUser) {
-		authUser.addKid(enfant);
-		enfRepo.save(enfant);
+		Optional<Parent> par = parRepo.findById(authUser.getId());
+		Parent ParentCreateur = par.get();
+		Enfant enfantCree = enfant;
+		ParentCreateur.addKid(enfantCree);
+		((DbUserLoginService) uService).createEnf(enfantCree);
+
 		return new RedirectView("/");
 	}
-
 }

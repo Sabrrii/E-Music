@@ -21,12 +21,14 @@
   </tr></thead>
   <tbody>
     <tr>
-
-      <td data-label="Nom">{{getNomEnfants}}</td>
-      <td data-label="Age"></td>
+	{{#enf}}
+      <td data-label="Nom">{{prenom}}</td>
+      <td data-label="Age">{{age}}</td>
       <td data-label=""><i class="pen square icon"></i>
       					<i class="pen square icon"></i></td>
+
     </tr>
+          	{{/enf}}
     {{/enfant}}
   </tbody>
 </table>

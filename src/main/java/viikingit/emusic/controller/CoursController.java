@@ -104,7 +104,7 @@ public class CoursController {
 		return new RedirectView("/listCours");
 	}
 
-	@RolesAllowed("PARENT")
+	@RolesAllowed("ADMIN")
 	@GetMapping("emploi_du_temps")
 	public String show_edt(@AuthenticationPrincipal Parent currentUser) {
 		return "cours/edt";
