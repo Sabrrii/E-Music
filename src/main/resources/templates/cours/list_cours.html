@@ -8,7 +8,9 @@
 </div>
 
 <div class="mini_spacer">
+ {{#userCo}}
 <a href="/newCours" class="ui fluid large red submit button" >Ajouter un nouveau cours</a>
+ {{/userCo}}
 </div>
 
 <div class="mini_spacer"></div>
@@ -21,19 +23,31 @@
       <img src="/img/">
     </div>
     <div class="content">
-      <div class="header"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{libelle}}</font></font></div>
 
+      <div class="header" style="display : flex;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{libelle}}</font></font>
+       <i class="user circle icon" style="visibility: visible; display : flex; margin-left : 3em;">{{nbPlaces}}</i></div>
+	   
       <div class="description"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
         Assister au <span style="font-weight: bold;">{{libelle}}</span>, de <span style="font-weight: bold;">{{ageMini}}</span> ans à <span style="font-weight: bold;">{{ageMaxi}}</span> ans, pour apprendre {{#instruments}}<span style="font-weight: bold;">{{intitule}}{{/instruments}}
+      </font></font></div>
+      <div class="mini_spacer"></div>
+      <div class="description"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Jour : <span style="font-weight: bold;">{{jour}}</span> à <span style="font-weight: bold;">{{heure}} : 00 h</span> d'une durée de <span style="font-weight: bold;">{{duree}} heure</span>
       </font></font></div>
       <div class="mini_spacer"></div>
       <div class="ui button">
       <a href="/signUpLesson/{{id}}"><i class="add icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
       Participer au cours
-    </font></font></div></a>
-    <i class="user circle icon" style="visibility: visible;">{{nbPlaces}}</i>
+
+    </font></font></div>
+    <div class="mini_spacer"></div>
+	<div style="display: flex; align-content: flex-end; flex-direction: row; flex-wrap: nowrap; justify-content: center">
+	 {{#userCo}}
+
 	<a href="/editCours/{{id}}" class="ui red mini icon button"><i class="edit icon" style="visibility: visible;"></i></a>
 	<a href="/delete/{{id}}#delete-message" class="ui red mini icon button"><i class="trash alternate icon" style="visibility: visible;"></i></a>
+	 {{/userCo}}
+	</div>
     </div>
   </div>
 </div>

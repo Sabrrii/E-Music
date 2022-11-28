@@ -28,6 +28,9 @@ public class Cours {
 	private int ageMini;
 	private int ageMaxi;
 	private int nbPlaces;
+	private String jour;
+	private int heure;
+	private int duree = 1;/* en heure */
 
 	@ManyToOne
 	private TypeCours typeCour;

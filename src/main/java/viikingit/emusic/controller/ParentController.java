@@ -1,6 +1,5 @@
 package viikingit.emusic.controller;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +26,7 @@ import viikingit.emusic.repository.ICoursRepository;
 import viikingit.emusic.repository.IEnfantRepository;
 import viikingit.emusic.repository.IInscriptionsRepository;
 import viikingit.emusic.repository.IParentRepository;
+import viikingit.emusic.service.DbUserLoginService;
 
 @Controller
 public class ParentController {
@@ -43,6 +44,9 @@ public class ParentController {
 	ICoursRepository courRepo;
 	
 	
+	@Autowired
+	private UserDetailsService uService;
+
 	@Autowired
 	private VueJS vue;
 
@@ -84,14 +88,15 @@ public class ParentController {
 	}
 
 	@PostMapping("myKids/add")
-	public RedirectView addKid(@ModelAttribute Enfant enfant,@AuthenticationPrincipal Parent authUser) {
+	public RedirectView addKid(@ModelAttribute Enfant enfant, @AuthenticationPrincipal Parent authUser) {
 		Optional<Parent> par = parRepo.findById(authUser.getId());
-		Parent Test = par.get();
-		Test.addKid(enfant);
-		enfRepo.save(enfant);
+		Parent ParentCreateur = par.get();
+		Enfant enfantCree = enfant;
+		ParentCreateur.addKid(enfantCree);
+		((DbUserLoginService) uService).createEnf(enfantCree);
+
 		return new RedirectView("/");
 	}
-	
 	
 	
 	@GetMapping("/account/delete/{id}")
@@ -113,15 +118,5 @@ public class ParentController {
 		insRepo.save(signIn);
 		return new RedirectView("/myLesson");
 	}
-	
-	/*
-	 * public String myKids(ModelMap model,@AuthenticationPrincipal Parent authUser) {
-	 * 		Optional<Parent> opt =parRepo.findById(authUser.getId());
-		List<Enfant> enfs= enfRepo.findByParent(authUser);
-		opt.ifPresent(orga -> model.put("enfant",orga));
-		model.put("enf", enfs);
-		*/
 
-	
-	
 }
