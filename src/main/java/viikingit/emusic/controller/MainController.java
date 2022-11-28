@@ -1,7 +1,12 @@
 package viikingit.emusic.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import viikingit.emusic.models.Parent;
+import viikingit.emusic.pojo.ActiveUser;
 import viikingit.emusic.repository.IParentRepository;
 import viikingit.emusic.service.DbUserLoginService;
 import viikingit.emusic.service.EmailServiceImpl;
@@ -27,6 +33,8 @@ public class MainController {
 	@Autowired
 	private EmailServiceImpl email;
 
+	
+	
 	@GetMapping("")
 	public String index(ModelMap model, @AuthenticationPrincipal Parent authUser) {
 		model.put("userCo", authUser);

@@ -4,13 +4,16 @@
   <a class="active item">Accueil</a>
   <a class="item">Liste des cours</a>
   <a class="item">Listes des instruments</a>
-   {{^userCo}}
-  <a class="item">Connexion</a>
-  <a class="item">Inscription</a>
-  {{/userCo}}
-  {{#userCo}}
-  <a  href="/logout" class="ui inverted button">Déconnexion</a>
-   {{/userCo}}
+
+   	        {{#user}}
+	        	{{^connected}}
+	        		 <a class="item">Connexion</a>
+  					<a class="item">Inscription</a>
+				{{/connected}}
+				{{#connected}}
+					<a  href="/logout" class="ui inverted button">Déconnexion</a>
+				{{/connected}}
+			{{/user}}
 </div>
  
   
@@ -26,13 +29,18 @@
 	          	<a  href="/listCours"class=" item">Liste des cours</a>
 	          	<a  href="/instruments"class=" item">Liste des instruments</a>
 	        	<div class="right item">
-	          	     {{#userCo}}
-	         			<a  href="/logout" class="ui inverted button">Déconnexion</a>
-	        		 {{/userCo}}
-	        		 {{^userCo}}
+	          	   
+	          	     {{^connected}}
 	        		 	 <a  href="/login" class="ui inverted button">Connexion</a>
 	        		 	 <a href= "/signup" class="ui inverted button">Inscription</a>
-	        		 {{/userCo}}
+	        		 {{/connected}}
+	        		 
+	        		 {{#user}}
+	        		 {{#connected}}
+	         			<a  href="/logout" class="ui inverted button">Déconnexion</a>
+	        		 {{/connected}}
+	        		 {{/user}}
+	        		
 	          </div>
 	        </div>
 	   </div>
