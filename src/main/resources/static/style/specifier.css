@@ -1,20 +1,9 @@
-.spacer{
-	margin-top: 5em;
-}
+/* CSS pour la liste des cours  */
 
-
-
-/* Mixins */
-@mixin createBox($width, $height, $bRadius, $bgColor, $margin){
-  width: $width;
-  height: $height;
-  border-radius: $bRadius;
-  background-color: $bgColor;
-  margin: $margin;
-  transition: .3s all ease-in-out;
-}
-
-
-.click:hover{
-	text-decoration: underline;
+.container_cards{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	margin-left : 1.5em;	
 }

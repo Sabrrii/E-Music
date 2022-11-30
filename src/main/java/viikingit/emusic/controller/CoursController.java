@@ -2,8 +2,6 @@ package viikingit.emusic.controller;
 
 import java.util.Optional;
 
-import javax.annotation.security.RolesAllowed;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -109,7 +107,6 @@ public class CoursController {
 		return new RedirectView("/listCours");
 	}
 
-	@RolesAllowed("ADMIN")
 	@GetMapping("emploi_du_temps")
 	public String show_edt(@AuthenticationPrincipal Parent currentUser) {
 		return "cours/edt";
