@@ -8,7 +8,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.view.RedirectView;
 
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.repository.IParentRepository;
@@ -39,11 +38,11 @@ public class MainController {
 	}
 
 	@PostMapping("signup")
-	public RedirectView addParent(@ModelAttribute Parent parent) {
+	public String addParent(@ModelAttribute Parent parent) {
 		Parent par = ((DbUserLoginService) uService).createUser(parent);
 		parentRepo.save(par);
 		email.sendSimpleMessage(parent.getUsername(), "Confirmation d'email", "Ceci est un test");
-		return new RedirectView("index");
+		return "index";
 	}
 
 	@GetMapping("login")
@@ -52,9 +51,9 @@ public class MainController {
 	}
 
 	@PostMapping("logout")
-	public RedirectView logout() {
+	public String logout() {
 
-		return new RedirectView("./index");
+		return "index";
 	}
 
 }
