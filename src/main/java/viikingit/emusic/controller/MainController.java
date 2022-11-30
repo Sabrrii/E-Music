@@ -43,7 +43,7 @@ public class MainController {
 		Parent par = ((DbUserLoginService) uService).createUser(parent);
 		parentRepo.save(par);
 		email.sendSimpleMessage(parent.getUsername(), "Confirmation d'email", "Ceci est un test");
-		return new RedirectView("/");
+		return new RedirectView("./");
 	}
 
 	@GetMapping("login")
@@ -54,7 +54,7 @@ public class MainController {
 	@PostMapping("logout")
 	public RedirectView logout() {
 
-		return new RedirectView("/");
+		return new RedirectView("./");
 	}
 
 }
