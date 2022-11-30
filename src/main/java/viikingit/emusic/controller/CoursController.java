@@ -1,6 +1,9 @@
 package viikingit.emusic.controller;
 
+import java.util.List;
 import java.util.Optional;
+
+import javax.annotation.security.RolesAllowed;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,10 +17,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import viikingit.emusic.models.Cours;
+import viikingit.emusic.models.Inscriptions;
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.models.TypeCours;
 import viikingit.emusic.repository.ICoursRepository;
+import viikingit.emusic.repository.IInscriptionsRepository;
 import viikingit.emusic.repository.IInstrumentsRepository;
+import viikingit.emusic.repository.IParentRepository;
 import viikingit.emusic.repository.ITypeCoursReposiroty;
 
 @Controller
@@ -31,12 +37,23 @@ public class CoursController {
 
 	@Autowired
 	private IInstrumentsRepository instruments;
+	
+	@Autowired
+	IParentRepository parRepo;
+	
+	
+	@Autowired
+	IInscriptionsRepository insRepo;
 
 
 
+	
 	@GetMapping("myLesson")
 	public String myLesson(ModelMap model, @ModelAttribute Parent parent, @AuthenticationPrincipal Parent authUser) {
-		model.put("userCo", authUser);
+		/*Optional<Parent> opt =parRepo.findById(authUser.getId());
+		List<Inscriptions> test = insRepo.findByParent(authUser);
+		opt.ifPresent(nullos -> model.put("nullos", test));
+		model.put("userCo", authUser);*/
 		return "cours/myLesson";
 	}
 
@@ -99,4 +116,11 @@ public class CoursController {
 		courRepo.deleteById(id);
 		return new RedirectView("/listCours");
 	}
+
+	@RolesAllowed("ADMIN")
+	@GetMapping("emploi_du_temps")
+	public String show_edt(@AuthenticationPrincipal Parent currentUser) {
+		return "cours/edt";
+	}
+
 }

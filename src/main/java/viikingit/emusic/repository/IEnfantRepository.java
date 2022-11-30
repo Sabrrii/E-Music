@@ -8,6 +8,10 @@ import org.springframework.data.repository.CrudRepository;
 import viikingit.emusic.models.Enfant;
 import viikingit.emusic.models.Parent;
 
-public interface IEnfantRepository extends CrudRepository <Enfant,Integer> {
+
+public interface IEnfantRepository extends CrudRepository<Enfant, Integer> {
 	public List<Enfant> findByParent(Parent authUser);
+
+	public Optional<Enfant> findByUsername(String username);
+
 }

@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,10 +69,19 @@ public class Parent implements UserDetails {
 		}
 	}
 
+
+	private String authorities = "PARENT";
+
+
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] auths = authorities.split(",");
+		List<SimpleGrantedAuthority> authoritiesObjects = new ArrayList<SimpleGrantedAuthority>();
+		for (String parent : auths) {
+			authoritiesObjects.add(new SimpleGrantedAuthority("ROLE_" + parent));
+		}
+		return authoritiesObjects; // (3)
 	}
 
 	@Override
