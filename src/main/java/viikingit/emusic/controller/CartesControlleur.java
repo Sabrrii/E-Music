@@ -30,7 +30,7 @@ public class CartesControlleur {
 
 		model.put("userCo", authUSer);
 
-		return "/user/FormCartes";
+		return "user/FormCartes";
 
 	}
 
@@ -43,7 +43,7 @@ public class CartesControlleur {
 		toAdd.setUser(authUSer);
 		authUSer.setCarte(toAdd);
 		carteRepo.save(toAdd);
-		return new RedirectView("./");
+		return new RedirectView("");
 	}
 
 }

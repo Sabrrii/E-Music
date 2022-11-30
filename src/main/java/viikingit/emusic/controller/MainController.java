@@ -34,7 +34,7 @@ public class MainController {
 
 	@GetMapping("signup")
 	public String signUp() {
-		return "/user/signUp";
+		return "user/signUp";
 	}
 
 	@PostMapping("signup")
@@ -47,7 +47,7 @@ public class MainController {
 
 	@GetMapping("login")
 	public String login() {
-		return "/user/login";
+		return "user/login";
 	}
 
 	@PostMapping("logout")

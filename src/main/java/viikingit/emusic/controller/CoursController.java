@@ -49,7 +49,7 @@ public class CoursController {
 		 * test = insRepo.findByParent(authUser); opt.ifPresent(nullos ->
 		 * model.put("nullos", test)); model.put("userCo", authUser);
 		 */
-		return "./cours/myLesson";
+		return "cours/myLesson";
 	}
 
 	@GetMapping("listCours")
@@ -59,7 +59,7 @@ public class CoursController {
 		model.put("type_cours", typecours.findAll());
 		model.put("instruments", instruments.findAll());
 		model.put("userCo", authUser);
-		return "./cours/list_cours";
+		return "cours/list_cours";
 	}
 
 	@GetMapping("newCours")
@@ -68,19 +68,19 @@ public class CoursController {
 		model.addAttribute("type_cours", typecours.findAll());
 		model.addAttribute("instruments", instruments.findAll());
 		model.put("userCo", authUser);
-		return "./cours/formNewCours";
+		return "cours/formNewCours";
 	}
 
 	@PostMapping("newCours")
 	public String newSubmitCours(@ModelAttribute Cours cours, @ModelAttribute TypeCours typecours) {
 		courRepo.save(cours);
-		return "./cours/list_cours";
+		return "cours/list_cours";
 	}
 
 	@GetMapping("instruments")
 	public String AllerAInstruments(ModelMap model, @AuthenticationPrincipal Parent authUser) {
 		model.put("userCo", authUser);
-		return "./cours/list_instruments";
+		return "cours/list_instruments";
 	}
 
 	// SABRI REGARDE LA METHODE MODIF
@@ -91,7 +91,7 @@ public class CoursController {
 		cour.ifPresent(cours -> model.put("cours", cours));
 		model.put("type_cours", typecours.findAll());
 		model.put("instruments", instruments.findAll());
-		return "./cours/formEditCours";
+		return "cours/formEditCours";
 	}
 
 	@PostMapping("editCours/{id}")
@@ -99,20 +99,20 @@ public class CoursController {
 		Cours toSave = courRepo.findById(id).get();
 		toSave = cour;
 		courRepo.save(toSave);
-		return new RedirectView("./listCours");
+		return new RedirectView("listCours");
 	}
 
 	@GetMapping("delete/{id}")
 	public RedirectView deleteAction(@PathVariable int id, RedirectAttributes attrs) {
 		courRepo.findById(id);
 		courRepo.deleteById(id);
-		return new RedirectView("./listCours");
+		return new RedirectView("listCours");
 	}
 
 	@RolesAllowed("ADMIN")
 	@GetMapping("emploi_du_temps")
 	public String show_edt(@AuthenticationPrincipal Parent currentUser) {
-		return "./cours/edt";
+		return "cours/edt";
 	}
 
 }
