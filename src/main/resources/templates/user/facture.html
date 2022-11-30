@@ -1,0 +1,103 @@
+{{> /include/header }}
+{{> /include/header_bar }}
+ <div class="ui text container">
+    <h2 class="ui center aligned icon header">
+      <i class="circular users icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      Facture
+    </font></font></h2>
+    
+    <div class="ui grid" style="margin-top : 2em;">
+          <div class="left floated five wide column">
+            <p class="interligne">Nom du client</p>
+            <p class="interligne">Adresse</p>
+            <p class="interligne">Ville</p>
+          </div>
+          <div class="right floated five wide column">
+            <p class="interligne">Date</p>
+            <p class="interligne">Numero de commande</p>
+            <p class="interligne">Numero de Facture</p>
+          </div>
+    </div>
+    
+    
+    <div class="ui center aligned container"  style="margin-top : 2em;">
+
+    <div class="ui center aligned two column grid">
+      <div class="row">
+      
+        <div class="column">
+          <div class="ui vertical fluid menu">
+            <div class="header item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+              Facturé à
+            </font></font></div>
+             <div class="item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+              Nom + adresse d'ou vient la facture
+            </font></font></div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui vertical fluid menu">
+            <div class="header item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+              Envoyé à
+            </font></font></div>
+            <div class="item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+              Nom + adresse a qui c'est destiné
+            </font></font></div>
+          </div>
+        </div>
+        
+        <div class="big_spacer"></div>
+        
+        <table class="ui unstackable table">
+          <thead>
+            <tr>
+              <th>Qté</th>
+              <th>Désignation</th>
+              <th class="right aligned">Prix unit.ht</th>
+              <th class="right aligned">Montant ht</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>cours de piano</td>
+              <td class="right aligned">150e</td>
+              <td class="right aligned">150e</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <table class="ui unstackable table">
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td class="right aligned">Total HT :</td>
+              <td class="right aligned">TVA% :</td>
+              <td class="right aligned">TOTAL :</td>
+            </tr>
+          </tbody>
+        </table>
+                
+
+            
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="ui grid"  style="margin-top : 2em; display: flex; align-items: center;">
+          <div class="left floated five wide column">
+            <h2>Conditions et modalités de paiments</h2>
+            <p>Le paiement est du dans 15 j</p>
+            <p>Banque</p>
+            <p>IBAN</p>
+            <p>Bic</p>
+          </div>
+          <div class="right floated five wide column">
+            <img class="ui small image" src="img/signature.png">
+          </div>
+    </div>
+    
+    </div>
+{{> /include/footer }}

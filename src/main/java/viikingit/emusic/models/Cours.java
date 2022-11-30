@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -29,12 +28,15 @@ public class Cours {
 	private int ageMini;
 	private int ageMaxi;
 	private int nbPlaces;
+	private String jour;
+	private int heure;
+	private int duree = 1;/* en heure */
 
 	@ManyToOne
 	private TypeCours typeCour;
 
-	@ManyToMany(mappedBy = "cour")
-	private List<Instruments> instrument;
+	@ManyToOne
+	private Instruments instruments;
 
 	@OneToMany(mappedBy = "cours")
 	private List<Inscriptions> inscrit;

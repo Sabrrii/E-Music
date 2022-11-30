@@ -12,16 +12,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import viikingit.emusic.models.Cartes;
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.repository.ICartesRepository;
-import viikingit.emusic.repository.IParentRepository;
 
 @Controller
 public class CartesControlleur {
 
 	@Autowired
 	private ICartesRepository carteRepo;
-
-	@Autowired
-	private IParentRepository parentRepo;
 
 	@GetMapping("myCard/{id}")
 	public String formCarteLog(ModelMap model, @AuthenticationPrincipal Parent authUSer) {
@@ -33,7 +29,9 @@ public class CartesControlleur {
 		}
 
 		model.put("userCo", authUSer);
-		return "user/FormCartes";
+
+		return "/user/FormCartes";
+
 	}
 
 	@PostMapping("myCard/edit")

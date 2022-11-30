@@ -6,12 +6,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Inscriptions {
 
 	@Id
@@ -25,5 +29,8 @@ public class Inscriptions {
 
 	@ManyToOne
 	private Cours cours;
+	
+	@ManyToOne 
+	private Parent parent;
 
 }
