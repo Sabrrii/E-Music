@@ -1,6 +1,5 @@
 package viikingit.emusic.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.security.RolesAllowed;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import viikingit.emusic.models.Cours;
-import viikingit.emusic.models.Inscriptions;
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.models.TypeCours;
 import viikingit.emusic.repository.ICoursRepository;
@@ -37,23 +35,20 @@ public class CoursController {
 
 	@Autowired
 	private IInstrumentsRepository instruments;
-	
+
 	@Autowired
 	IParentRepository parRepo;
-	
-	
+
 	@Autowired
 	IInscriptionsRepository insRepo;
 
-
-
-	
 	@GetMapping("myLesson")
 	public String myLesson(ModelMap model, @ModelAttribute Parent parent, @AuthenticationPrincipal Parent authUser) {
-		/*Optional<Parent> opt =parRepo.findById(authUser.getId());
-		List<Inscriptions> test = insRepo.findByParent(authUser);
-		opt.ifPresent(nullos -> model.put("nullos", test));
-		model.put("userCo", authUser);*/
+		/*
+		 * Optional<Parent> opt =parRepo.findById(authUser.getId()); List<Inscriptions>
+		 * test = insRepo.findByParent(authUser); opt.ifPresent(nullos ->
+		 * model.put("nullos", test)); model.put("userCo", authUser);
+		 */
 		return "cours/myLesson";
 	}
 
@@ -66,7 +61,7 @@ public class CoursController {
 		model.put("userCo", authUser);
 		return "cours/list_cours";
 	}
-	
+
 	@GetMapping("newCours")
 	public String newCours(ModelMap model, @AuthenticationPrincipal Parent authUser) {
 		model.addAttribute("cours", new Cours());
@@ -75,7 +70,6 @@ public class CoursController {
 		model.put("userCo", authUser);
 		return "cours/formNewCours";
 	}
-	
 
 	@PostMapping("newCours")
 	public RedirectView newSubmitCours(@ModelAttribute Cours cours, @ModelAttribute TypeCours typecours) {
@@ -100,7 +94,6 @@ public class CoursController {
 		return "cours/formEditCours";
 	}
 
-	
 	@PostMapping("editCours/{id}")
 	public RedirectView coursEdited(@ModelAttribute Cours cour, @PathVariable int id) {
 		Cours toSave = courRepo.findById(id).get();
@@ -108,8 +101,7 @@ public class CoursController {
 		courRepo.save(toSave);
 		return new RedirectView("/listCours");
 	}
-	
-	
+
 	@GetMapping("delete/{id}")
 	public RedirectView deleteAction(@PathVariable int id, RedirectAttributes attrs) {
 		courRepo.findById(id);
