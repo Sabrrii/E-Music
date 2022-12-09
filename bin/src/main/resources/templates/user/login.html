@@ -8,25 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Site Properties -->
-  <title>Login Example - Semantic</title>
+  <title>E-music</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.0/semantic.min.css" integrity="sha512-PwhgdrueUt7iVICnZMjYcbiLalCztrVfzUIYXekIK8hZu4DQP141GrKh6fUHmNERWi4bGdBXIZqtBZnsSzHEMg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" type="text/css" href="style/reset.css">
-  <link rel="stylesheet" type="text/css" href="style/site.css">
-
-  <link rel="stylesheet" type="text/css" href="style/container.css">
-  <link rel="stylesheet" type="text/css" href="style/grid.css">
-  <link rel="stylesheet" type="text/css" href="style/header.css">
-  <link rel="stylesheet" type="text/css" href="style/image.css">
-  <link rel="stylesheet" type="text/css" href="style/menu.css">
-
-  <link rel="stylesheet" type="text/css" href="style/divider.css">
-  <link rel="stylesheet" type="text/css" href="style/segment.css">
-  <link rel="stylesheet" type="text/css" href="style/form.css">
-  <link rel="stylesheet" type="text/css" href="style/input.css">
-  <link rel="stylesheet" type="text/css" href="style/button.css">
-  <link rel="stylesheet" type="text/css" href="style/list.css">
-  <link rel="stylesheet" type="text/css" href="style/message.css">
-  <link rel="stylesheet" type="text/css" href="style/icon.css">
 
   <script src="assets/library/jquery.min.js"></script>
   <script src="../dist/components/form.js"></script>
@@ -46,70 +29,33 @@
       max-width: 450px;
     }
   </style>
-  <script>
-  $(document)
-    .ready(function() {
-      $('.ui.form')
-        .form({
-          fields: {
-            email: {
-              identifier  : 'email',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your e-mail'
-                },
-                {
-                  type   : 'email',
-                  prompt : 'Please enter a valid e-mail'
-                }
-              ]
-            },
-            password: {
-              identifier  : 'password',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'length[6]',
-                  prompt : 'Your password must be at least 6 characters'
-                }
-              ]
-            }
-          }
-        })
-      ;
-    })
-  ;
-  </script>
 </head>
 <body>
 
 <div class="ui middle aligned center aligned grid">
   <div class="column">
     <h2 class="ui teal image header">
-      <img src="assets/images/logo.png" class="image">
-      <div class="content">
+      <img src="/img/icon.png" class="image">
+      <div class="red content" style="color :black;">
         Connexion
       </div>
     </h2>
-    <form class="ui large form">
+    <form class="ui large form"  action="/login" method="post">
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input type="text" name="email" placeholder="E-mail address">
+            <input type="text" name="username" placeholder="Adresse mail *">
           </div>
         </div>
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="password" placeholder="Mot de passe *">
           </div>
         </div>
-        <div class="ui fluid large teal submit button">Login</div>
+        <p class="item"><div class="ui label">Les champs marqués d'un * sont obligatoires</div></p>	
+        <button type ="submit" class="ui fluid large red submit button">Se connecter</button>
       </div>
 
       <div class="ui error message"></div>
@@ -117,7 +63,7 @@
     </form>
 
     <div class="ui message">
-      New to us? <a href="#">Sign Up</a>
+      Pas encore de compte ? <a href="/signup">S'inscrire</a>
     </div>
   </div>
 </div>
@@ -125,3 +71,4 @@
 </body>
 
 </html>
+

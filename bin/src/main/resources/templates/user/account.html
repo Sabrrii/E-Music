@@ -1,0 +1,82 @@
+{{ > /include/header}}
+{{> /include/menu_account}}
+
+<div class="pusher">
+	    <div class="ui inverted vertical center aligned segment">
+	        <h1 class="ui inverted header"><div class="ui medium images"><img src="/img/logo.png"></div>Mes infomartions personnelles</h1>
+	    </div>
+</div>
+	      
+{{#parent}}
+
+<div id="d1" class="ui vertical ">
+	<form class="ui large form" action="/account/edit/{{id}}" method="post">
+      <div class="ui stacked segment">
+	      <div class="ui form">
+	 		 <div class="fields">
+	 		
+			    <div class="field">
+			     <h3>Prenom</h3>
+			      <input required="required" type="text" name="prenom" value={{prenom}}>
+			    </div>
+			    <div class="field">
+			     <h3>Nom</h3>
+			      <input required="required" type="text"  name ="nom" value={{nom}}>
+			   </div>
+			 </div>
+		</div>
+		
+		<div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input  required="required" type="text" name="username" value={{username}} >
+          </div>
+        </div>
+		
+		<div class="field">
+			<div class="ui left icon input">
+				<i class="home icon"></i>
+				<input required="required" type="text"  name="adresse" value={{adresse}}>
+			</div>
+		</div>
+		
+		<div class="field">
+			<div class="ui left icon input">
+				<i class="city icon"></i>
+				<input required="required" type="text"  name="ville" value={{ville}}>
+			</div>
+		</div>
+		
+		<div class="field">
+			<div class="ui left icon input">
+				<input required="required" type="number"  name="quotientFamilial " value ="0" value={{quotientFamilial}}>
+			</div>
+		</div>
+
+	     <div class="ui form">
+	 		 <div class="fields">
+			    <div class="field">
+			    <i class="phone icon"></i>
+			      <input required="required" type="text" name="tel1" value={{tel1}}>
+			    </div>
+			    <div class="field">
+			    <i class="phone icon"></i>
+			      <input type="text"  name ="tel2" value={{tel2}}>
+			   </div>
+			 </div>		
+
+      </div>
+		<button class="ui fluid large red submit button" >Modifier</button>
+	</div>
+
+    </form>
+</div>
+<div>
+<a href ="/account/delete/{{id}}"><button class="ui fluid large red submit button"> Supprimer mon compte </i> </button></a>
+</div>
+{{/parent}}
+
+
+
+
+{{ >/include/footer}}

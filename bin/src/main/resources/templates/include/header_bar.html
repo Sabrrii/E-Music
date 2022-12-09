@@ -1,27 +1,41 @@
-<div class="ui fixed inverted menu">
-    <div class="ui container">
-      <a href="#" class="header item">
-        <img class="logo" src="img/icon.png">
-        e-Music
-      </a>
-      <a href="" class="item">Accueil</a>
-      <div class="ui simple dropdown item">
-        Menue déroulant <i class="dropdown icon"></i>
-        <div class="menu">
-          <a class="item" href="#">Link Item</a>
-          <a class="item" href="#">Link Item</a>
-          <div class="divider"></div>
-          <div class="header">Header Item</div>
-          <div class="item">
-            <i class="dropdown icon"></i>
-            Sub Menu
-            <div class="menu">
-              <a class="item" href="#">Link Item</a>
-              <a class="item" href="#">Link Item</a>
-            </div>
-          </div>
-          <a class="item" href="#">Link Item</a>
-        </div>
-      </div>
-    </div>
+
+ <!-- Sidebar Menu -->
+<div class="ui vertical inverted sidebar menu">
+  <a class="active item">Accueil</a>
+  <a class="item">Liste des cours</a>
+  <a class="item">Listes des instruments</a>
+   {{^userCo}}
+  <a class="item">Connexion</a>
+  <a class="item">Inscription</a>
+  {{/userCo}}
+  {{#userCo}}
+  <a  href="/logout" class="ui inverted button">Déconnexion</a>
+   {{/userCo}}
 </div>
+ 
+  
+  
+<div class="pusher">
+	<div class="ui inverted vertical center aligned segment">
+		<div class="ui container">
+	    	<div class="ui large secondary inverted pointing menu">
+	        	<a class="toc item">
+	            	<i class="sidebar icon"></i>
+	          	</a>
+	          	<a  href="/"class="active item">Accueil</a>
+	          	<a  href="/listCours"class=" item">Liste des cours</a>
+	          	<a  href="/instruments"class=" item">Liste des instruments</a>
+	        	<div class="right item">
+	          	     {{#userCo}}
+	         			<a  href="/logout" class="ui inverted button">Déconnexion</a>
+	        		 {{/userCo}}
+	        		 {{^userCo}}
+	        		 	 <a  href="/login" class="ui inverted button">Connexion</a>
+	        		 	 <a href= "/signup" class="ui inverted button">Inscription</a>
+	        		 {{/userCo}}
+	          </div>
+	        </div>
+	   </div>
+	 </div>
+</div>
+	      

@@ -1,0 +1,39 @@
+{{ > /include/header}}
+{{> /include/menu_account}}
+
+<div class="pusher">
+	    <div class="ui inverted vertical center aligned segment">
+	        <h1 class="ui inverted header"><div class="ui medium images"><img src="/img/logo.png"></div>Mes enfants enregistrées</h1>
+	    </div>
+</div>
+
+
+{{#enfant}}
+<div>
+<div>
+<a href="/myKids/add/{{id}}" class="ui red button">Ajouter un enfant</a>
+</div>
+<table class="ui celled table">
+  <thead>
+    <tr><th>Prenom</th>
+    <th>Age</th>
+    <th></th>
+  </tr></thead>
+  <tbody>
+    <tr>
+	{{#enf}}
+      <td data-label="Prenom">{{prenom}}</td>
+      <td data-label="Age">{{age}}</td>
+      <td data-label=""><i class="edit icon"></i>
+      					<i class="delete square icon"></i></td>
+
+    </tr>
+     {{/enf}}
+    {{/enfant}}
+  </tbody>
+</table>
+</div>
+
+ 
+ 
+ {{ >/include/footer}}
