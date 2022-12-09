@@ -9,28 +9,31 @@
 	        	<a class="toc item">
 	            	<i class="sidebar icon"></i>
 	          	</a>
-	          	<a  href="./"class=" item">Accueil</a>
-	          	<a  href="./listCours"class=" item">List des cours</a>
-	          	<a  href="./instruments"class=" item">List des instruments</a>
+	          	<a  href="/"class=" item">Accueil</a>
+	          	<a  href="/listCours"class=" item">List des cours</a>
+	          	<a  href="/instruments"class=" item">List des instruments</a>
 	        	<div class="right item">
 	          	     {{#userCo}}
-	         			<a  href="./logout" class="ui inverted button">Déconnexion</a>
+	         			<a  href="/logout" class="ui inverted button">Déconnexion</a>
 	        		 {{/userCo}}
 	        		 {{^userCo}}
-	        		 	 <a  href="./login" class="ui inverted button">Connexion</a>
-	        		 	 <a href= "./signup" class="ui inverted button">Inscription</a>
+	        		 	 <a  href="/login" class="ui inverted button">Connexion</a>
+	        		 	 <a href= "/signup" class="ui inverted button">Inscription</a>
 	        		 {{/userCo}}
 	          </div>
 	        </div>
 	        <div class="ui inverted menu">
-  <div class="item">
-    <a href= "./myCard/{id}" class="ui inverted button">Mon moyen de paiement</a>
+   <div class="item">
+  	<a href= "/account/{id}" class="ui inverted button">Mon compte</a>
   </div>
   <div class="item">
-    <a href= "./myKids/{id}" class="ui inverted button">Mes Enfants</a>
+    <a href= "/myCard/{id}" class="ui inverted button">Mon moyen de paiement</a>
+  </div>
+  <div class="item">
+    <a href= "/myKids/{id}" class="ui inverted button">Mes Enfants</a>
   </div>
     <div class="item">
-    <a href= "./myLesson" class="ui inverted button">Mes Cours</a>
+    <a href= "/emploi_du_temps" class="ui inverted button">Mes Cours</a>
   </div>
 </div>
 	      
