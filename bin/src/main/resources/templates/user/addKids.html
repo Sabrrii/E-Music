@@ -1,0 +1,79 @@
+{{> /include/header }}
+{{> /include/header_bar}}
+
+<div  id="d2" class="ui middle aligned center aligned grid">
+  <div class="column">
+    <div class="pusher">
+	    <div class="ui inverted vertical center aligned segment">
+	        <h1 class="ui inverted header"><div class="ui medium images"><img src="/img/logo.png"></div>Ajouter un enfant</h1>
+	    </div>
+	</div>
+    <form class="ui large form" method="post" action="/myKids/add">
+     <div class="ui stacked segment">
+     
+  
+	     
+	     <div class="mini_spacer"></div>
+	     <div class="ui horizontal divider"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Informations sur l'enfant</font></font></div>
+	     <div class="little_spacer"></div>
+	     
+	     <div class="two fields">
+	     	<div class="field">
+	     		<div class="ui left icon input">
+	     			<i class="child icon" style="visibility: visible;"></i>
+	     			<input type="text" name="prenom" placeholder="Prenom de l'enfant">
+	     		</div>
+	     	</div>
+	     	<div class="field">
+		 		<div class="ui left icon input">
+		 			<i class="child icon" style="visibility: visible;"></i>
+		 			<input type="text" name="nom" placeholder="Nom de l'enfant">
+		 		</div>
+		 	</div>
+		 	<div class="field">
+		 		<div class="ui left icon input">
+		 			<i class="birthday cake icon" style="visibility: visible;"></i>
+		 			<input type="int" name="age" placeholder="Age de l'enfant">
+	     		</div>
+	     	</div>
+	     </div>
+	    
+	
+        
+        
+        <div class="little_spacer"></div>
+        <div class="ui horizontal divider"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Informations de connexion</font></font></div>
+      	<div class="little_spacer"></div>
+      	
+	    <div class="two-fields">	
+	    	<div class="field">
+				<div class="ui left icon input">
+					<i class="keyboard icon" style="visibility: visible;"></i>
+					<input type="text" name="username" placeholder="Nom de connexion pour l'enfant">
+	    		</div>
+	    	</div>
+	    	<div class="field">
+				<div class="ui left icon input">
+					<i class="shield alternate icon" style="visibility: visible;"></i>
+					<input type="text" name="password" placeholder="Mot de passe pour l'enfant">
+	    		</div>
+	    	</div>
+	    </div>
+	    
+	    
+        <div class="mini_spacer"></div>
+        <a href="/myKids/{id}" class="ui large red button">Annuler</a>
+        <button class="ui large red submit button">Ajouter l'enfant</button>
+      
+
+		</div>
+		<div class="ui error message"></div>
+		</form>
+	</div>
+</div>
+  
+ 
+
+
+
+{{> /include/footer }}
