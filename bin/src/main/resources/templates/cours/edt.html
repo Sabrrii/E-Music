@@ -1,0 +1,110 @@
+{{> /include/header }}
+{{> /include/header_bar}}
+
+<div class="pusher">
+	    <div class="ui inverted vertical center aligned segment">
+	        <h1 class="ui inverted header"><div class="ui medium images"><img src="img/logo.png"></div>Emploi du temps</h1>
+	    </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="ui calendar" id="inline_calendar">
+
+{{#cours}}
+<table class="ui definition table">
+  <thead>
+    <tr><th></th>
+    <th class="red"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lundi</font></font></th>
+    <th class="red"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mardi</font></font></th>
+    <th class="red"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mercredi</font></font></th>
+    <th class="red"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Jeudi</font></font></th>
+    <th class="red"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vendredi</font></font></th>
+    <th class="red"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Samedi</font></font></th>
+    <th class="red"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dimanche</font></font></th>
+  </tr></thead>
+  <tbody>
+    <tr class="red">
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8 : 00</font></font></td>
+    </tr>
+     <tr class="red" >
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9 : 00</font></font></td>
+    </tr >
+     <tr class="red">
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10 : 00</font></font></td>
+    </tr>
+     <tr class="red">
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">11 : 00</font></font></td>
+    </tr>
+     <tr class="red">
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">12 : 00</font></font></td>
+    </tr>
+     <tr class="red">
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">13 : 00</font></font></td>
+    </tr>
+     <tr class="red">
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">14 : 00</font></font></td>
+    </tr>
+    <tr class="red">
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">15 : 00</font></font></td>
+    </tr>
+    <tr class="red">
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">16 : 00</font></font></td>
+    </tr>
+    <tr class="red">
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">17 : 00</font></font></td>
+    </tr>
+    <tr class="red">
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">18 : 00</font></font></td>
+    </tr>
+    <tr class="red">
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">19 : 00</font></font></td>
+       <td></td>
+    </tr>
+    <tr class="red">
+      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">20 : 00</font></font></td>
+    </tr>
+</tbody></table>
+{{/cours}}
+
+</div>
+
+
+<div class="spacer"></div>
+
+
+{{> /include/footer }}
+
+<script>
+
+$(function() {
+	$('#calendar').calendar({
+	    text: {
+	        days: ['L', 'M', 'M', 'J', 'V', 'S','D'],
+	        dayNamesShort: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam','Dim'],
+	        dayNames: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
+	        months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+	        monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+	        today: 'Aujourd\'hui',
+	        now: 'Maintenant',
+	        weekNo: 'Semaine'
+	      },
+	      eventClass: 'inverted red',
+	      eventDates: [
+	          {
+	            date: new Date('2022-11-22'),
+	            message: 'Cliquez pour plus de détails',
+	          }
+	      ],
+	      formatter: {
+	          time: 'H:mm',
+	      },
+	      disabledHours: [{
+	          hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+	          message: 'We are sleeping !'
+	        }
+	    ],
+	});
+});
+
+</script>
