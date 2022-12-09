@@ -1,3 +1,17 @@
+/* CSS footer */
+
+.main-container{
+	display : flex;
+	flex-direction : column;
+	min-height : 100vh;
+	overflow : hidden;
+}
+
+.main {
+	display : flex;
+}
+
+
 /* CSS pour la liste des cours  */
 
 .container_cards{
