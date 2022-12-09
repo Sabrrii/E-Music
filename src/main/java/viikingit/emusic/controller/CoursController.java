@@ -40,15 +40,6 @@ public class CoursController {
 	@Autowired
 	IInscriptionsRepository insRepo;
 
-	@GetMapping("myLesson")
-	public String myLesson(ModelMap model, @ModelAttribute Parent parent, @AuthenticationPrincipal Parent authUser) {
-		/*
-		 * Optional<Parent> opt =parRepo.findById(authUser.getId()); List<Inscriptions>
-		 * test = insRepo.findByParent(authUser); opt.ifPresent(nullos ->
-		 * model.put("nullos", test)); model.put("userCo", authUser);
-		 */
-		return "cours/myLesson";
-	}
 
 	@GetMapping("listCours")
 	public String listCours(ModelMap model, @AuthenticationPrincipal Parent authUser) {
@@ -81,7 +72,6 @@ public class CoursController {
 		return "cours/list_instruments";
 	}
 
-	// SABRI REGARDE LA METHODE MODIF
 
 	@GetMapping("editCours/{id}")
 	public String formEditCours(ModelMap model, @PathVariable int id) {
