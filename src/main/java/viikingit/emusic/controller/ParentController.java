@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import io.github.jeemv.springboot.vuejs.VueJS;
@@ -36,14 +37,13 @@ public class ParentController {
 
 	@Autowired
 	IEnfantRepository enfRepo;
-	
+
 	@Autowired
 	IInscriptionsRepository insRepo;
-	
+
 	@Autowired
 	ICoursRepository courRepo;
-	
-	
+
 	@Autowired
 	private UserDetailsService uService;
 
@@ -72,10 +72,10 @@ public class ParentController {
 	}
 
 	@GetMapping("myKids/{id}")
-	public String myKids(ModelMap model,@AuthenticationPrincipal Parent authUser) {
-		Optional<Parent> opt =parRepo.findById(authUser.getId());
-		List<Enfant> enfs= enfRepo.findByParent(authUser);
-		opt.ifPresent(orga -> model.put("enfant",orga));
+	public String myKids(ModelMap model, @AuthenticationPrincipal Parent authUser) {
+		Optional<Parent> opt = parRepo.findById(authUser.getId());
+		List<Enfant> enfs = enfRepo.findByParent(authUser);
+		opt.ifPresent(orga -> model.put("enfant", orga));
 		model.put("enf", enfs);
 		model.put("userCo", authUser);
 		return "user/myKids";
@@ -97,19 +97,25 @@ public class ParentController {
 
 		return new RedirectView("/");
 	}
-	
-	
+
+	@GetMapping("myKids/delete/{id}")
+	public RedirectView deleteActionKid(@PathVariable int id, RedirectAttributes attrs) {
+		enfRepo.findById(id);
+		enfRepo.deleteById(id);
+		return new RedirectView("/myKids/{id}");
+	}
+
 	@GetMapping("/account/delete/{id}")
-	public RedirectView deleteConfirm(@PathVariable int id ,HttpServletRequest request) {
+	public RedirectView deleteConfirm(@PathVariable int id, HttpServletRequest request) {
 		parRepo.deleteById(id);
 		HttpSession session = request.getSession();
 		session.invalidate();
 		session = request.getSession(false);
-		return new RedirectView("/"); 
+		return new RedirectView("/");
 	}
-	
+
 	@GetMapping("/signUpLesson/{id}")
-	public RedirectView ajouterCours(@PathVariable int id,@AuthenticationPrincipal Parent authUser) {
+	public RedirectView ajouterCours(@PathVariable int id, @AuthenticationPrincipal Parent authUser) {
 		Cours courToSave = courRepo.findById(id).get();
 		Inscriptions signIn = new Inscriptions();
 		signIn.setNombre_de_paiements(4);

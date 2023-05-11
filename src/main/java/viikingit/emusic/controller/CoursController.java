@@ -2,6 +2,8 @@ package viikingit.emusic.controller;
 
 import java.util.Optional;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -40,7 +42,6 @@ public class CoursController {
 	@Autowired
 	IInscriptionsRepository insRepo;
 
-
 	@GetMapping("listCours")
 	public String listCours(ModelMap model, @AuthenticationPrincipal Parent authUser) {
 		Iterable<Cours> cours = courRepo.findAll();
@@ -51,6 +52,7 @@ public class CoursController {
 		return "cours/list_cours";
 	}
 
+	@RolesAllowed("ADMIN")
 	@GetMapping("newCours")
 	public String newCours(ModelMap model, @AuthenticationPrincipal Parent authUser) {
 		model.addAttribute("cours", new Cours());
@@ -60,6 +62,7 @@ public class CoursController {
 		return "cours/formNewCours";
 	}
 
+	@RolesAllowed("ADMIN")
 	@PostMapping("newCours")
 	public RedirectView newSubmitCours(@ModelAttribute Cours cours, @ModelAttribute TypeCours typecours) {
 		courRepo.save(cours);
@@ -72,7 +75,7 @@ public class CoursController {
 		return "cours/list_instruments";
 	}
 
-
+	@RolesAllowed("ADMIN")
 	@GetMapping("editCours/{id}")
 	public String formEditCours(ModelMap model, @PathVariable int id) {
 		Optional<Cours> cour = courRepo.findById(id);
@@ -82,6 +85,7 @@ public class CoursController {
 		return "cours/formEditCours";
 	}
 
+	@RolesAllowed("ADMIN")
 	@PostMapping("editCours/{id}")
 	public RedirectView coursEdited(@ModelAttribute Cours cour, @PathVariable int id) {
 		Cours toSave = courRepo.findById(id).get();
@@ -90,6 +94,7 @@ public class CoursController {
 		return new RedirectView("/listCours");
 	}
 
+	@RolesAllowed("ADMIN")
 	@GetMapping("delete/{id}")
 	public RedirectView deleteAction(@PathVariable int id, RedirectAttributes attrs) {
 		courRepo.findById(id);
