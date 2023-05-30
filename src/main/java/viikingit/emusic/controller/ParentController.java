@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,6 +24,7 @@ import viikingit.emusic.models.Cours;
 import viikingit.emusic.models.Enfant;
 import viikingit.emusic.models.Inscriptions;
 import viikingit.emusic.models.Parent;
+import viikingit.emusic.pojo.ActiveUser;
 import viikingit.emusic.repository.ICoursRepository;
 import viikingit.emusic.repository.IEnfantRepository;
 import viikingit.emusic.repository.IInscriptionsRepository;
@@ -55,41 +57,50 @@ public class ParentController {
 		return this.vue;
 	}
 
+	private ActiveUser activeUser=new ActiveUser();
+
 	@GetMapping("account/{id}")
-	public String editAccountPage(ModelMap model, @AuthenticationPrincipal Parent authUser) {
-		Optional<Parent> opt = parRepo.findById(authUser.getId());
+	public String editAccountPage(ModelMap model) {
+		Optional<Parent> opt = parRepo.findById(activeUser.getActivePar().getId());
 		opt.ifPresent(orga -> model.put("parent", orga));
-		model.put("userCo", authUser);
+		activeUser.connect(model);
 		return "/user/account";
 	}
 
 	@PostMapping("account/edit/{id}")
-	public RedirectView edited(@ModelAttribute Parent parent, @PathVariable int id) {
-		Parent toSave = parRepo.findById(id).get();
-		toSave = parent;
-		parRepo.save(toSave);
+	public RedirectView edited(@ModelAttribute Parent parent) {
+		Parent par =(activeUser.getActivePar());
+		par.setNom(parent.getNom());
+		par.setPrenom(parent.getPrenom());
+		par.setUsername(parent.getUsername());
+		par.setAdresse(parent.getAdresse());
+		par.setVille(parent.getVille());
+		par.setQuotientFamilial(parent.getQuotientFamilial());
+		par.setTel1(parent.getTel1());
+		par.setTel2(parent.getTel2());
+		parRepo.save(par);
 		return new RedirectView("/");
 	}
 
 	@GetMapping("myKids/{id}")
-	public String myKids(ModelMap model, @AuthenticationPrincipal Parent authUser) {
-		Optional<Parent> opt = parRepo.findById(authUser.getId());
-		List<Enfant> enfs = enfRepo.findByParent(authUser);
+	public String myKids(ModelMap model) {
+		Optional<Parent> opt = parRepo.findById(activeUser.getActivePar().getId());
+		List<Enfant> enfs = enfRepo.findByParent(activeUser.getActivePar());
 		opt.ifPresent(orga -> model.put("enfant", orga));
 		model.put("enf", enfs);
-		model.put("userCo", authUser);
+		activeUser.connect(model);
 		return "user/myKids";
 	}
 
 	@GetMapping("myKids/add/{id}")
-	public String formAddKid(ModelMap model, @AuthenticationPrincipal Parent authUser) {
-		model.put("userCo", authUser);
+	public String formAddKid(ModelMap model) {
+		activeUser.connect(model);
 		return "user/addKids";
 	}
 
 	@PostMapping("myKids/add")
-	public RedirectView addKid(@ModelAttribute Enfant enfant, @AuthenticationPrincipal Parent authUser) {
-		Optional<Parent> par = parRepo.findById(authUser.getId());
+	public RedirectView addKid(@ModelAttribute Enfant enfant) {
+		Optional<Parent> par = parRepo.findById(activeUser.getActivePar().getId());
 		Parent ParentCreateur = par.get();
 		Enfant enfantCree = enfant;
 		ParentCreateur.addKid(enfantCree);
@@ -115,12 +126,12 @@ public class ParentController {
 	}
 
 	@GetMapping("/signUpLesson/{id}")
-	public RedirectView ajouterCours(@PathVariable int id, @AuthenticationPrincipal Parent authUser) {
+	public RedirectView ajouterCours(@PathVariable int id) {
 		Cours courToSave = courRepo.findById(id).get();
 		Inscriptions signIn = new Inscriptions();
 		signIn.setNombre_de_paiements(4);
 		signIn.setCours(courToSave);
-		signIn.setParent(authUser);
+		signIn.setParent(activeUser.getActivePar());
 		insRepo.save(signIn);
 		return new RedirectView("/myLesson");
 	}
