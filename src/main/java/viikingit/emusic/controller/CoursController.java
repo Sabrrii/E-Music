@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import viikingit.emusic.models.Cours;
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.models.TypeCours;
+import viikingit.emusic.pojo.ActiveUser;
 import viikingit.emusic.repository.ICoursRepository;
 import viikingit.emusic.repository.IInscriptionsRepository;
 import viikingit.emusic.repository.IInstrumentsRepository;
@@ -36,29 +37,32 @@ public class CoursController {
 	@Autowired
 	private IInstrumentsRepository instruments;
 
+	private ActiveUser activeUser = new ActiveUser();
+
 	@Autowired
 	IParentRepository parRepo;
 
 	@Autowired
 	IInscriptionsRepository insRepo;
 
+
 	@GetMapping("listCours")
-	public String listCours(ModelMap model, @AuthenticationPrincipal Parent authUser) {
+	public String listCours(ModelMap model) {
 		Iterable<Cours> cours = courRepo.findAll();
 		model.put("cours", cours);
 		model.put("type_cours", typecours.findAll());
 		model.put("instruments", instruments.findAll());
-		model.put("userCo", authUser);
+		activeUser.connect(model);
 		return "cours/list_cours";
 	}
 
 	@RolesAllowed("ADMIN")
 	@GetMapping("newCours")
-	public String newCours(ModelMap model, @AuthenticationPrincipal Parent authUser) {
+	public String newCours(ModelMap model) {
 		model.addAttribute("cours", new Cours());
 		model.addAttribute("type_cours", typecours.findAll());
 		model.addAttribute("instruments", instruments.findAll());
-		model.put("userCo", authUser);
+		activeUser.connect(model);
 		return "cours/formNewCours";
 	}
 
