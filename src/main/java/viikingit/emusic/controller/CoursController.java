@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import viikingit.emusic.models.Cours;
+import viikingit.emusic.models.Inscriptions;
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.models.TypeCours;
 import viikingit.emusic.pojo.ActiveUser;
@@ -106,9 +107,16 @@ public class CoursController {
 		return new RedirectView("/listCours");
 	}
 
-	@GetMapping("emploi_du_temps")
-	public String show_edt(@AuthenticationPrincipal Parent currentUser) {
-		return "cours/edt";
+	@GetMapping("mesCours/{id}")
+	public String show_edt(ModelMap model) {
+		Iterable<Cours> cours = courRepo.findAll();
+		model.put("cours", cours);
+		/*model.put("type_cours", typecours.findAll());
+		model.put("instruments", instruments.findAll());*/
+		Optional<Inscriptions> inscriptions = insRepo.findByIDParent(activeUser.getActivePar().getId());
+		model.put("inscriptions", inscriptions);
+		activeUser.connect(model);
+		return "cours/mesCours";
 	}
 
 }

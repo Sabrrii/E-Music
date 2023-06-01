@@ -133,7 +133,7 @@ public class ParentController {
 		signIn.setCours(courToSave);
 		signIn.setParent(activeUser.getActivePar());
 		insRepo.save(signIn);
-		return new RedirectView("/myLesson");
+		return new RedirectView("/mesCours/{id}");
 	}
 
 }
