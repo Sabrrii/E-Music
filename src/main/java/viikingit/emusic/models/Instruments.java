@@ -22,6 +22,9 @@ public class Instruments {
 
 	private String intitule;
 
+	//Mettre en BDD le nom de l'image qui correspond ("trompette.png")
+	private String image;
+
 	@OneToMany(mappedBy = "instruments")
 	private List<Cours> iCours;
 }

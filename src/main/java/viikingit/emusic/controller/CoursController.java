@@ -47,11 +47,29 @@ public class CoursController {
 
 
 	@GetMapping("listCours")
-	public String listCours(ModelMap model) {
+	public String listCours(ModelMap model, Authentication authentication) {
+		if (authentication == null || !authentication.isAuthenticated()) {
+			// Géstion du cas où l'utilisateur n'est pas authentifiée
+			return "/login";
+		}
+		
 		Iterable<Cours> cours = courRepo.findAll();
 		model.put("cours", cours);
 		model.put("type_cours", typecours.findAll());
 		model.put("instruments", instruments.findAll());
+
+		boolean isAdmin = false;
+
+		// Vérification si l'utilisateur a le rôle "ADMIN"
+		Object principal = authentication.getPrincipal();
+		if (principal instanceof Parent) {
+			Parent authUser = (Parent) principal;
+			isAdmin = authUser.getAuthorities().stream()
+						   .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
+		}
+	
+		model.put("isAdmin", isAdmin);
+
 		activeUser.connect(model);
 		return "cours/list_cours";
 	}
