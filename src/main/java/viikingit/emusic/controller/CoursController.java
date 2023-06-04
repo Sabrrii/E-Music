@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.annotation.security.RolesAllowed;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -92,8 +93,8 @@ public class CoursController {
 	}
 
 	@GetMapping("instruments")
-	public String AllerAInstruments(ModelMap model, @AuthenticationPrincipal Parent authUser) {
-		model.put("userCo", authUser);
+	public String AllerAInstruments(ModelMap model) {
+		activeUser.connect(model);
 		return "cours/list_instruments";
 	}
 
