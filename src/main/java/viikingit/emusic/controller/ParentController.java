@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,9 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import io.github.jeemv.springboot.vuejs.VueJS;
-import viikingit.emusic.models.Cours;
 import viikingit.emusic.models.Enfant;
-import viikingit.emusic.models.Inscriptions;
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.pojo.ActiveUser;
 import viikingit.emusic.repository.ICoursRepository;
@@ -125,15 +121,6 @@ public class ParentController {
 		return new RedirectView("/");
 	}
 
-	@GetMapping("/signUpLesson/{id}")
-	public RedirectView ajouterCours(@PathVariable int id) {
-		Cours courToSave = courRepo.findById(id).get();
-		Inscriptions signIn = new Inscriptions();
-		signIn.setNombre_de_paiements(4);
-		signIn.setCours(courToSave);
-		signIn.setParent(activeUser.getActivePar());
-		insRepo.save(signIn);
-		return new RedirectView("/mesCours/{id}");
-	}
+
 
 }

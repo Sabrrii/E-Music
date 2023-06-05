@@ -22,14 +22,14 @@ public class ActiveUser {
 
     
     public void connect(ModelMap model){
-        Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (responsable instanceof Parent) {
-			Parent authUser = (Parent) responsable;
-			model.put("userCo", authUser);
-		}else if (responsable instanceof Enfant){
-			Enfant authUser = (Enfant) responsable;
-			model.put("userCo", authUser);
-		}
+      Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      if (responsable instanceof Parent) {
+        Parent authUser = (Parent) responsable;
+        model.put("userCo", authUser);
+      }else if (responsable instanceof Enfant){
+        Enfant authUser = (Enfant) responsable;
+        model.put("userCo", authUser);
+      }
     }
 
     public Parent getActivePar(){

@@ -1,23 +1,46 @@
 {{> /include/header }}
-{{> /include/header_bar}}
-
+{{> /include/menu_account}}
 <div class="pusher">
 	    <div class="ui inverted vertical center aligned segment">
-	        <h1 class="ui inverted header"><div class="ui medium images"><img src="img/logo.png"></div>Emploi du temps</h1>
+	        <h1 class="ui inverted header"><div class="ui medium images"><img src="/img/logo.png"></div>Mes Cours</h1>
 	    </div>
 </div>
 
 <div class="spacer"></div>
-
-<div class="ui calendar" id="inline_calendar">
-
+<div class="container_cards">	
 {{#cours}}
-
-    OK
+	
+	<div class="ui horizontal cards" style="margin-top : 0;">
+	  <div class="card">
+		<div class="image">
+		  <img src="/img/{{instruments.image}}" alt="{{instruments.intitule}}">
+		</div>
+		<div class="content">
+	
+		  <div class="header" style="display : flex;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{libelle}}</font></font>
+		   <i class="user circle icon" style="visibility: visible; display : flex; margin-left : 3em;"><p style="display : flex;">{{nbPlaces}}</p></i></div>
+		   
+		  <div class="description"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+			Assister au <span style="font-weight: bold;">{{libelle}}</span>, pour apprendre {{#instruments}}<span style="font-weight: bold;">{{intitule}}{{/instruments}}
+		  </font></font></div>
+		  <div class="mini_spacer"></div>
+		  <div class="description"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+			Jour : <span style="font-weight: bold;">{{jour}}</span> à <span style="font-weight: bold;">{{heure}} : 00 h</span> d'une durée de <span style="font-weight: bold;">{{duree}} heure</span>
+		  </font></font></div>
+		  <div class="mini_spacer"></div>
+		<div class="mini_spacer"></div>
+		<div style="display: flex; align-content: flex-end; flex-direction: row; flex-wrap: nowrap; justify-content: center">
+		
+	
+		</div>
+		</div>
+	  </div>
+	</div>
 {{/cours}}
-	{{#inscriptions}}
-	{{cours}} <br>{{parent}}
-	{{/inscriptions}}
+{{^cours}}
+<h1>Vous n'êtes inscrit  a aucun cours</h1>
+{{/cours}}
+	</div>
 </div>
 
 

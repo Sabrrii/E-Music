@@ -4,9 +4,10 @@ import java.util.Optional;
 
 import javax.annotation.security.RolesAllowed;
 
+import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import viikingit.emusic.models.Cours;
+import viikingit.emusic.models.Enfant;
 import viikingit.emusic.models.Inscriptions;
 import viikingit.emusic.models.Parent;
 import viikingit.emusic.models.TypeCours;
@@ -127,15 +129,45 @@ public class CoursController {
 	}
 
 	@GetMapping("mesCours/{id}")
-	public String show_edt(ModelMap model) {
-		Iterable<Cours> cours = courRepo.findAll();
+	public String voirMesCours(ModelMap model) {
+		//Pour rappel la table Inscriptions est une table de liaison entre les tables Parent et Cours
+		//Recuperation des cours auquel l'utilisateur est inscrit
+		Iterable<Inscriptions> inscriptions = null;
+	  	Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      	if (responsable instanceof Parent) {
+			inscriptions = insRepo.findByParent(activeUser.getActivePar());
+		}else if (responsable instanceof Enfant){
+			inscriptions = insRepo.findByEnfant(activeUser.getActiveEnf());
+		}
+		//Recuperation des id de cours auquel l'utilisateur est inscrit dans la table Inscriptions
+		java.util.List<Integer> idCours = new java.util.ArrayList<Integer>();
+		for (Inscriptions ins : inscriptions) {
+			idCours.add(ins.getCours().getId());
+		}
+		//Recuperation des Cours en eux meme grace aux id recuperer precedement 
+		Iterable<Cours> cours = courRepo.findAllById(idCours);
 		model.put("cours", cours);
-		/*model.put("type_cours", typecours.findAll());
-		model.put("instruments", instruments.findAll());*/
-		Optional<Inscriptions> inscriptions = insRepo.findByIDParent(activeUser.getActivePar().getId());
 		model.put("inscriptions", inscriptions);
+		model.put("type_cours", typecours.findAll());
+		model.put("instruments", instruments.findAll());
 		activeUser.connect(model);
 		return "cours/mesCours";
+	}
+
+	@GetMapping("/signUpLesson/{id}")
+	public RedirectView ajouterCours(@PathVariable int id) {
+		Cours courToSave = courRepo.findById(id).get();
+		Inscriptions signIn = new Inscriptions();
+		signIn.setNombre_de_paiements(4);
+		signIn.setCours(courToSave);
+		Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (responsable instanceof Parent) {
+			signIn.setParent(activeUser.getActivePar());
+		}else if (responsable instanceof Enfant){
+			signIn.setEnfant(activeUser.getActiveEnf());
+		}
+		insRepo.save(signIn);
+		return new RedirectView("/mesCours/{id}");
 	}
 
 }
