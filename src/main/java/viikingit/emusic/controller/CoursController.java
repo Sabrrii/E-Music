@@ -48,14 +48,13 @@ public class CoursController {
 	@Autowired
 	IInscriptionsRepository insRepo;
 
-
 	@GetMapping("listCours")
 	public String listCours(ModelMap model, Authentication authentication) {
 		if (authentication == null || !authentication.isAuthenticated()) {
 			// Géstion du cas où l'utilisateur n'est pas authentifiée
 			return "/login";
 		}
-		
+
 		Iterable<Cours> cours = courRepo.findAll();
 		model.put("cours", cours);
 		model.put("type_cours", typecours.findAll());
@@ -67,10 +66,9 @@ public class CoursController {
 		Object principal = authentication.getPrincipal();
 		if (principal instanceof Parent) {
 			Parent authUser = (Parent) principal;
-			isAdmin = authUser.getAuthorities().stream()
-						   .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
+			isAdmin = authUser.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
 		}
-	
+
 		model.put("isAdmin", isAdmin);
 
 		activeUser.connect(model);
@@ -128,22 +126,38 @@ public class CoursController {
 	}
 
 	@GetMapping("mesCours/{id}")
-	public String voirMesCours(ModelMap model) {
-		//Pour rappel la table Inscriptions est une table de liaison entre les tables Parent et Cours
-		//Recuperation des cours auquel l'utilisateur est inscrit
+	public String voirMesCours(ModelMap model, Authentication authentication) {
+
+		boolean showButtons = false;
+
+		if (authentication != null) {
+			Object principal = authentication.getPrincipal();
+			if (principal instanceof Parent) {
+				Parent authUser = (Parent) principal;
+				showButtons = authUser.getAuthorities().stream().anyMatch(
+						role -> role.getAuthority().equals("ROLE_ADMIN") || role.getAuthority().equals("ROLE_PARENT"));
+			}
+		}
+
+		model.put("showButtons", showButtons);
+
+		// Pour rappel la table Inscriptions est une table de liaison entre les tables
+		// Parent et Cours
+		// Recuperation des cours auquel l'utilisateur est inscrit
 		Iterable<Inscriptions> inscriptions = null;
-	  	Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      	if (responsable instanceof Parent) {
+		Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (responsable instanceof Parent) {
 			inscriptions = insRepo.findByParent(activeUser.getActivePar());
-		}else if (responsable instanceof Enfant){
+		} else if (responsable instanceof Enfant) {
 			inscriptions = insRepo.findByEnfant(activeUser.getActiveEnf());
 		}
-		//Recuperation des id de cours auquel l'utilisateur est inscrit dans la table Inscriptions
+		// Recuperation des id de cours auquel l'utilisateur est inscrit dans la table
+		// Inscriptions
 		java.util.List<Integer> idCours = new java.util.ArrayList<Integer>();
 		for (Inscriptions ins : inscriptions) {
 			idCours.add(ins.getCours().getId());
 		}
-		//Recuperation des Cours en eux meme grace aux id recuperer precedement 
+		// Recuperation des Cours en eux meme grace aux id recuperer precedement
 		Iterable<Cours> cours = courRepo.findAllById(idCours);
 		model.put("cours", cours);
 		model.put("inscriptions", inscriptions);
@@ -162,7 +176,7 @@ public class CoursController {
 		Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (responsable instanceof Parent) {
 			signIn.setParent(activeUser.getActivePar());
-		}else if (responsable instanceof Enfant){
+		} else if (responsable instanceof Enfant) {
 			signIn.setEnfant(activeUser.getActiveEnf());
 		}
 		insRepo.save(signIn);

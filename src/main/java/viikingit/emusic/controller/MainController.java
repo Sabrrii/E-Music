@@ -1,6 +1,7 @@
 package viikingit.emusic.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,7 +17,7 @@ import viikingit.emusic.service.DbUserLoginService;
 import viikingit.emusic.service.EmailServiceImpl;
 
 @Controller
-public class MainController{
+public class MainController {
 
 	@Autowired
 	private IParentRepository parentRepo;
@@ -27,11 +28,25 @@ public class MainController{
 	@Autowired
 	private EmailServiceImpl email;
 
-	private ActiveUser activeUser=new ActiveUser();
+	private ActiveUser activeUser = new ActiveUser();
 
 	@GetMapping("")
-	public String index(ModelMap model) {
+	public String index(ModelMap model, Authentication authentication) {
 		activeUser.connect(model);
+
+		boolean showButtons = false;
+
+		if (authentication != null) {
+			Object principal = authentication.getPrincipal();
+			if (principal instanceof Parent) {
+				Parent authUser = (Parent) principal;
+				showButtons = authUser.getAuthorities().stream().anyMatch(
+						role -> role.getAuthority().equals("ROLE_ADMIN") || role.getAuthority().equals("ROLE_PARENT"));
+			}
+		}
+
+		model.put("showButtons", showButtons);
+
 		return "index";
 	}
 
@@ -58,5 +73,4 @@ public class MainController{
 
 		return new RedirectView("/");
 	}
-
 }

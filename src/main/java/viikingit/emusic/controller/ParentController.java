@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -53,10 +54,24 @@ public class ParentController {
 		return this.vue;
 	}
 
-	private ActiveUser activeUser=new ActiveUser();
+	private ActiveUser activeUser = new ActiveUser();
 
 	@GetMapping("account/{id}")
-	public String editAccountPage(ModelMap model) {
+	public String editAccountPage(ModelMap model, Authentication authentication) {
+
+		boolean showButtons = false;
+
+		if (authentication != null) {
+			Object principal = authentication.getPrincipal();
+			if (principal instanceof Parent) {
+				Parent authUser = (Parent) principal;
+				showButtons = authUser.getAuthorities().stream().anyMatch(
+						role -> role.getAuthority().equals("ROLE_ADMIN") || role.getAuthority().equals("ROLE_PARENT"));
+			}
+		}
+
+		model.put("showButtons", showButtons);
+
 		Optional<Parent> opt = parRepo.findById(activeUser.getActivePar().getId());
 		opt.ifPresent(orga -> model.put("parent", orga));
 		activeUser.connect(model);
@@ -65,7 +80,7 @@ public class ParentController {
 
 	@PostMapping("account/edit/{id}")
 	public RedirectView edited(@ModelAttribute Parent parent) {
-		Parent par =(activeUser.getActivePar());
+		Parent par = (activeUser.getActivePar());
 		par.setNom(parent.getNom());
 		par.setPrenom(parent.getPrenom());
 		par.setUsername(parent.getUsername());
@@ -79,7 +94,21 @@ public class ParentController {
 	}
 
 	@GetMapping("myKids/{id}")
-	public String myKids(ModelMap model) {
+	public String myKids(ModelMap model, Authentication authentication) {
+
+		boolean showButtons = false;
+
+		if (authentication != null) {
+			Object principal = authentication.getPrincipal();
+			if (principal instanceof Parent) {
+				Parent authUser = (Parent) principal;
+				showButtons = authUser.getAuthorities().stream().anyMatch(
+						role -> role.getAuthority().equals("ROLE_ADMIN") || role.getAuthority().equals("ROLE_PARENT"));
+			}
+		}
+
+		model.put("showButtons", showButtons);
+
 		Optional<Parent> opt = parRepo.findById(activeUser.getActivePar().getId());
 		List<Enfant> enfs = enfRepo.findByParent(activeUser.getActivePar());
 		opt.ifPresent(orga -> model.put("enfant", orga));
@@ -120,7 +149,5 @@ public class ParentController {
 		session = request.getSession(false);
 		return new RedirectView("/");
 	}
-
-
 
 }

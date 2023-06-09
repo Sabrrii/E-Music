@@ -6,7 +6,7 @@
 		<div class="ui container"> 	
 </div>
 	  
-	      <div class="ui text container">
+	       <div class="ui text container">
 	        <h1 class="ui inverted header">
 	          e-Music
 	        </h1>
@@ -14,8 +14,10 @@
 	        {{#userCo}}
 	        	<h1>Bienvenue sur votre espace {{Prenom}}</h1>
 	        <div class="container-button" style="display: flex;flex-wrap: nowrap; margin: 46px; align-content: center; justify-content: center; flex-direction: column;">
+	        	{{#showButtons}}
 		        <a href ="/account/{{id}}" class="ui red huge primary button"><i class="user tie icon" style="visibility: visible;"></i>Mon compte</a>
 		        <a href ="/myKids/{{id}}" class="ui red huge primary button"><i class="child icon" style="visibility: visible;"></i>Mes enfants</a>
+		        {{/showButtons}}
 		        <a href ="/mesCours/{{id}}" class="ui huge red primary button"><i class="book icon" style="visibility: visible;"></i>Mes cours</a>
 	        </div>
 	        {{/userCo}}
